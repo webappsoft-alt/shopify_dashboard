@@ -1,0 +1,114 @@
+.css-1t8x7v1>.ps-menu-button {
+    height: auto !important;
+}
+
+.css-1t8x7v1>.ps-menu-button {
+    height: auto !important;
+}
+
+.css-1tqrhto>.ps-menu-button {
+    height: auto !important;
+}
+
+.ps-menu-label {
+    font-size: .9rem !important;
+}
+
+.css-16jesut>.ps-menu-button {
+    height: auto !important;
+}
+
+.css-1t8x7v1>.ps-menu-button:hover {
+    display: flex !important;
+    align-items: center !important;
+    justify-items: center !important;
+    width: 100% !important;
+    background-color: white !important;
+    border-radius: 10px !important;
+}
+
+
+.ps-menu-button:hover {
+    background-color: white !important;
+    border-radius: 10px !important;
+    /* padding: 0rem 0rem 0rem 1rem !important; */
+
+}
+
+.shadow1 {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.shadow2 {
+    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+}
+
+.customer_height {
+    height: 33rem;
+}
+
+.avatar {
+    height: 9rem;
+    width: 9rem;
+    background-color: lightblue;
+    border-radius: 50%;
+}
+
+.btn1 {
+    flex-wrap: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: auto;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+}
+
+/* home page css starts-------------------------- */
+.trial{
+    background-color: rgb(24, 23, 23);
+    padding: 1rem 1rem ;
+    color: white;
+    border-radius: 10px;
+  }
+  .planButton{
+  background-color: white;
+  border-radius: 10px;
+  padding: .6rem 1rem ;
+  color: black;
+  }
+  .accordion-item{
+    /* border-radius: 20px !important; */
+    border: none !important;
+    
+  }
+  .accordion-header:focus{
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 80px !important;
+  }
+  .accordion-button {
+    background-color: transparent !important;
+    border: none !important;
+  }
+  .accordion-header:focus{
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+  }
+  .accordion-button:focus{
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+
+  }
+.progress{
+    width: 80% !important;
+    --bs-progress-height: 0.4rem !important;
+    background-color: #d4d4d4 !important;
+}
+.progress-bar {
+    background-color: black !important;
+
+}

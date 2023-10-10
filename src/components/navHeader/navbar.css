@@ -1,0 +1,21 @@
+.nav_img {
+    width: 7rem;
+}
+
+
+.search {
+    width: 40rem;
+    border-radius: 0.6rem;
+}
+
+@media (max-width:1200px) {
+    .search {
+        width: 30rem;
+    }
+}
+
+@media (max-width:1200px) {
+    .search {
+        width: 100%;
+    }
+}
