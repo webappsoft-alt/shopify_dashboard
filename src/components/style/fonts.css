@@ -1,0 +1,38 @@
+/* ----------font_sizes--------- */
+.font_bold{
+    font-size: 1.25rem;
+}
+.font_medium{
+    font-size:  0.8125rem;
+}
+/* ----------font_weight---------- */
+.fw_m{
+    font-weight: 500;
+}
+.fw_s{
+    font-weight: 400;
+}
+.fw_sb{
+    font-weight: 600;
+}
+.fw_b{
+    font-weight: 700;
+}
+/* font_families */
+
+@font-face {
+    font-family: 'inter_light';
+    src: url('./Inter/Inter-Light.ttf');
+}
+@font-face {
+    font-family: 'inter_regular';
+    src: url('./Inter/Inter-Regular.ttf');
+}
+@font-face {
+    font-family: 'inter_semibold';
+    src: url('./Inter/Inter-SemiBold.ttf');
+}
+@font-face {
+    font-family: 'inter_bold';
+    src: url('./Inter/Inter-Bold.ttf');
+}

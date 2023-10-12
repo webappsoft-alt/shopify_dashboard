@@ -1,3 +1,21 @@
+@import url('./fonts.css');
+@import url('./color.css');
+.inter_light {
+  font-family: 'inter_light';
+}
+
+.inter_regular {
+  font-family: 'inter_regular';
+}
+
+.inter_semibold {
+  font-family: 'inter_semibold';
+}
+
+.inter_bold {
+  font-family: 'inter_bold';
+}
+
 .css-1t8x7v1>.ps-menu-button {
     height: auto !important;
 }
@@ -31,10 +49,13 @@
 .ps-menu-button:hover {
     background-color: white !important;
     border-radius: 10px !important;
-    /* padding: 0rem 0rem 0rem 1rem !important; */
+  
 
 }
-
+.sidebar_main{
+  background-color: var(--dark_grey) !important;
+  
+}
 .shadow1 {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
@@ -66,16 +87,16 @@
 }
 
 /* home page css starts-------------------------- */
-.trial{
-    background-color: rgb(24, 23, 23);
-    padding: 1rem 1rem ;
-    color: white;
-    border-radius: 10px;
-  }
+.trial {
+  background-color: var(--secondary);
+  padding: 0.6rem 0.9rem;
+  color: white;
+  border-radius: 0.5rem;
+}
   .planButton{
   background-color: white;
-  border-radius: 10px;
-  padding: .6rem 1rem ;
+  border-radius: 7px;
+  padding: .3rem .7rem ;
   color: black;
   }
   .accordion-item{
@@ -83,6 +104,7 @@
     border: none !important;
     
   }
+
   .accordion-header:focus{
     outline: none !important;
     box-shadow: none !important;
@@ -91,24 +113,133 @@
   .accordion-button {
     background-color: transparent !important;
     border: none !important;
+    padding:  12px !important;
   }
   .accordion-header:focus{
     box-shadow: none !important;
     border: none !important;
     outline: none !important;
   }
+  
+element.style {
+}
+.accordion-body {
+    padding: 8px 5px !important;
+ 
+}
+
+  .accordion-button:not(.collapsed)::before {
+
+  }
+  .accordion-button::after {
+
+  }
+  
   .accordion-button:focus{
     outline: none !important;
     border: none !important;
     box-shadow: none !important;
 
   }
+  .accordion-item:first-of-type .accordion-button {
+    background-color: #F1F1F1 !important;
+    border-radius: 0px !important;
+    border: 1px solid #EBEBEB !important;
+  }
 .progress{
     width: 80% !important;
-    --bs-progress-height: 0.4rem !important;
+    --bs-progress-height: 0.3rem !important;
     background-color: #d4d4d4 !important;
 }
 .progress-bar {
     background-color: black !important;
+}
 
+    .rotateIcon{
+ 
+        transform: rotate(180deg)!important; 
+    }
+    .increase{
+        height: auto !important;
+        /* padding-bottom: 2rem; */
+    }
+    .rounded-circle {
+        width: 20px;
+        height: 20px;
+        border: 2px dashed #797777;
+        border-radius: 50%;
+      }
+      .add_product{
+        background-color: #F1F1F1;
+        padding: 1rem ;
+        border-radius: 10px;
+      }
+      .link-no-underline {
+        text-decoration: none; 
+        font-size: 14px;
+      }
+      .add_btn{
+        margin-top: .8rem;
+        background-color: var(--light_black) !important;
+        color: white;
+        font-size: 12px ;
+        padding: .29rem 1rem ;
+        border-radius: 7px;
+      }
+      .import_btn{
+        font-size: 13px ;
+        padding: .29rem 1rem ;
+   
+        border-radius: 7px;
+      }
+      .import_btn:hover{
+        background-color: #EAEAEA !important;
+   
+     
+      }
+      .hoverClass{
+        padding: .7rem 1rem;
+        border-radius: 10px;
+      }
+      .hoverClass:hover
+      {
+background-color: #EAEAEA;
+
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0; 
+}
+.form-control{
+  color: var(--primary);
+    border: 1px solid #303030 !important;
+    background-color: #FAFAFA !important;
+
+}
+.form-control:focus {
+    color: var(--bs-body-color);
+    background-color: #FAFAFA !important;
+    border: 1px solid #303030 !important;
+    /* outline: 0; */
+    box-shadow: none !important;
+}
+.form-label{
+font-size: 15px !important;
+}
+p{
+    font-size: 14px;
+    font-family: 'inter_regular';
+    color: var(--primary);
+}
+h1, h2, h3, h4, h5, h6, p {
+  color: var(--secondary) ;
+  font-size: .9rem;
+  /* font-family: 'inter_regular'; */
+  margin: 0;
+}
+.extend{
+  color: #DDDADD;
+  /* font-size: --font_medium; */
 }
