@@ -8,7 +8,7 @@ const NavHeader = () => {
     return (
         // <div>
             <Navbar expand="lg" sticky="top"  className='bg-black main_nav fade-in2' id="navbar">
-                <Container className='sm:px-3 px-2' >
+                <Container className='sm:px-3 px-4' fluid >
                     <Navbar.Brand className='' >
                         <Image src={logo} alt="" className="nav_img"/>
                     </Navbar.Brand>

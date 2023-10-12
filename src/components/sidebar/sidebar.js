@@ -21,75 +21,49 @@ import { FaPlusCircle } from "react-icons/fa";
 const ShopifySidebar = () => {
   return (
     <>
-      <div className="h-screen sticky top-0" >
-        
-        <Sidebar className="h-full sidebar_main" >
+      <div className=" sticky top-14" style={{height:"92.3vh"}} >
+
+        <Sidebar className="h-full sidebar_main "  color="#ebebeb" backgroundColor="#ebebeb" >
           <Menu>
             <MenuItem component={<Link href={"/home"} />}
-             icon={<FiHome />} > Home </MenuItem>
-            {/* <MenuItem component={<Link href={"/order"} /> } icon={<FaShoppingCart />}> Orders </MenuItem> */}
-            <SubMenu component={<Link href={"/order"} /> } icon={<FaShoppingCart />} label="Orders">
+              icon={<FiHome />} > Home </MenuItem>
+            <SubMenu component={<Link href={"/order"} />} icon={<FaShoppingCart />} label="Orders">
               <MenuItem
-                icon={<FaShoppingCart />}
-                component={<Link href={"/draft"} />}
-              >
-                {" "}
-        Drafts
+                // icon={<FaShoppingCart />}
+                component={<Link href={"/draft"} />}  >
+                Drafts
               </MenuItem>
               <MenuItem
-                icon={<FaBox />}
-                component={<Link href={"/products"} />}
-              >
-                {" "}
-                Inventory{" "}
+                // icon={<FaBox />}
+                component={<Link href={"/"} />} >
+                Inventory
               </MenuItem>
-          
-
-
-
-
-
-
-
-
-
-          
-                      </SubMenu>
-            <SubMenu icon={<FaProductHunt />} label="Products">
+           </SubMenu>
+            <SubMenu icon={<FaProductHunt />} label="Products" color="#616161">
               <MenuItem
-                icon={<FaShoppingCart />}
-                component={<Link href={"/"} />}
-              >
-                {" "}
+                // icon={<FaShoppingCart />}
+                component={<Link href={"/"} />} >
                 Collections
               </MenuItem>
               <MenuItem
-                icon={<FaBox />}
-                component={<Link href={"/products"} />}
-              >
-                {" "}
-                Inventory{" "}
+                // icon={<FaBox />}
+                component={<Link href={"/products"} />} >
+                Inventory
               </MenuItem>
               <MenuItem
-                icon={<FaShoppingBag />}
-                component={<Link href={"/products"} />}
-              >
-                {" "}
-                Purchase orders{" "}
+                // icon={<FaShoppingBag />}
+                component={<Link href={"/products"} />}>
+                Purchase orders
               </MenuItem>
               <MenuItem
-                icon={<FaExchangeAlt />}
-                component={<Link href={"/products"} />}
-              >
-                {" "}
-                Transfers{" "}
+                // icon={<FaExchangeAlt />}
+                component={<Link href={"/products"} />}>
+                Transfers
               </MenuItem>
               <MenuItem
-                icon={<FaGift />}
-                component={<Link href={"/products"} />}
-              >
-                {" "}
-                Gift Card{" "}
+                // icon={<FaGift />}
+                component={<Link href={"/products"} />} >
+                Gift Card
               </MenuItem>
             </SubMenu>
             <MenuItem component={<Link href={"/customers"} />} icon={<FaUsers />}> Customers </MenuItem>
@@ -97,7 +71,6 @@ const ShopifySidebar = () => {
             <MenuItem icon={<FaChartBar />}> Analytics </MenuItem>
             <MenuItem icon={<FaBullhorn />}> Marketing </MenuItem>
             <MenuItem icon={<FaPercent />}> Discounts </MenuItem>
-         
           </Menu>
         </Sidebar>
       </div>

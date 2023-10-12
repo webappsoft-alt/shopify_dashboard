@@ -10,10 +10,7 @@ const Page = () => {
             <h5 className="font-bold">Draft Orders</h5>
             <div className="bg-white mt-4 customer_height rounded-xl shadow1 p-4" >
                 <div className="h-full w-full flex-col flex justify-center items-center">
-                <Image src='/order.svg' width={230} height={230} />
-                    {/* <div className="avatar">
-
-                    </div> */}
+                <Image src='/order.svg' width={230} height={230} alt='' />
                     <h6 className=" font-semibold mt-2 text-lg">Manually create orders and invoices</h6>
                     <div className="w-2/4 text-center px-4" style={{color:"#787878"}} >
                     Use draft orders to take orders over the phone, email invoices to customers, and collect payments.

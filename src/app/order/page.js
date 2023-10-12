@@ -9,11 +9,11 @@ const Page = () => {
             <h5 className="font-bold">Orders</h5>
             <div className="bg-white mt-4 customer_height rounded-xl shadow1 p-4" >
                 <div className="h-full w-full flex-col flex justify-center items-center">
-                <Image src='/order.svg' width={230} height={230} />
+                <Image src='/order.svg' width={230} height={230} alt=''/>
                     {/* <div className="avatar">
 
                     </div> */}
-                    <h6 className=" font-semibold mt-2 text-lg">Your orders will show here</h6>
+                    <h6 className=" font-semibold text-base">Your orders will show here</h6>
                     {/* <div className="w-2/4 text-center px-4" style={{color:"#787878"}} >
                         Manage customer details, see customer order history, and group customer into segments
                     </div>

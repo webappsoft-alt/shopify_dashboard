@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import NavHeader from '@/components/navHeader/navHeader'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/components/style/main.css'
+import '@/components/style/font_Sizes.css'
 
 const inter = Inter({ subsets: ['latin'] })
 

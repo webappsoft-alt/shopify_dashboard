@@ -123,15 +123,14 @@ const Page = () => {
                               </Link>
                             </p>
                             <div className="d-flex align-items-center gap-4">
-                              <button className="add_btn">Add Product</button>
-                    
+                              <Link href={'/addproduct'} className="add_btn">Add Product</Link>
                             </div>
                           </div>
                           <div className="ps-5">
                             <Image
                               src="/add-product.svg"
                               width={240}
-                              height={240}
+                              height={240} alt=""
                             />
                           </div>
                         </div>
@@ -227,7 +226,7 @@ const Page = () => {
                             <Image
                               src="/add-product.svg"
                               width={240}
-                              height={240}
+                              height={240} alt=""
                             />
                           </div>
                         </div>
