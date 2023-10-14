@@ -5,7 +5,7 @@ import NavHeader from '@/components/navHeader/navHeader'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/components/style/main.css'
 import '@/components/style/font_Sizes.css'
-
+import '@shopify/polaris/build/esm/styles.css';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {

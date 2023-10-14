@@ -29,6 +29,10 @@
     src: url('./Inter/Inter-Regular.ttf');
 }
 @font-face {
+    font-family: 'inter_medium';
+    src: url('./Inter/Inter-Medium.ttf');
+}
+@font-face {
     font-family: 'inter_semibold';
     src: url('./Inter/Inter-SemiBold.ttf');
 }

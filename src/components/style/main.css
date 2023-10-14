@@ -13,15 +13,40 @@
   font-family: 'inter_semibold';
 }
 
+.inter_medium {
+  font-family: 'inter_medium';
+}
+
 .inter_bold {
   font-family: 'inter_bold';
 }
 
-* {
+.color1 {
   color: #303030;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-size: 13px;
+  margin: 0;
+}
+
+* {
+  /* color: #303030; */
   font-family: 'inter_regular';
 }
 
+.f13 {
+  font-size: 13px;
+}
+
+.css-y6nfyh>.ps-menu-button,
+.css-1654oxy>.ps-menu-button,
 .css-1t8x7v1>.ps-menu-button {
   height: auto !important;
 }
@@ -30,38 +55,122 @@
   height: auto !important;
 }
 
+.css-14xmt93>.ps-menu-button,
 .css-1tqrhto>.ps-menu-button {
   height: auto !important;
-  padding-left: 64px !important;
+  padding-left: 2rem !important;
   padding-top: 0.1rem;
   padding-bottom: 0.1rem;
   color: #616161;
 }
 
 .ps-menu-label {
-  font-size: .9rem !important;
+  font-size: 13px !important;
+}
+
+.css-16jesut>.ps-menu-button {
+  padding: 0 0.5rem !important;
+}
+
+/* .css-14xmt93 >.ps-menu-button, */
+.ps-submenu-expand-icon {
+  display: none !important;
+}
+
+.Polaris-Icon_yj27d svg {
+  fill: #4a4a4a !important;
+}
+
+.ps-active .Polaris-Icon_yj27d svg {
+  fill: #1a1a1a !important;
+}
+
+.menuText {
+  font-family: 'inter_medium';
+  color: #5e5e5e;
+  padding: 0.25rem 0 0.25rem 0.5rem;
+}
+
+.menuTextIcon svg {
+  font-family: 'inter_regular';
+  fill: #8a8a8a;
+  font-size: 1.1rem;
+}
+
+.filter {
+  filter: brightness(0) saturate(100%) invert(36%) sepia(13%) saturate(137%) hue-rotate(169deg) brightness(95%) contrast(87%);
+}
+
+.css-wx7wi4 {
+  margin-right: 0.5rem !important;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+}
+
+.css-y6nfyh>.ps-menu-button {
+  padding: 0 0.5rem !important;
 }
 
 .css-16jesut>.ps-menu-button {
   height: auto !important;
 }
 
-.css-1t8x7v1>.ps-menu-button:hover {
+.css-1654oxy>.ps-menu-button,
+.css-1t8x7v1>.ps-menu-button {
+  padding: 0 0.5rem 0 0.5rem !important;
+}
+
+.padd_inline {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
+
+.padd_left {
+  padding-left: 0.5rem !important;
+}
+
+/* .ps-menu-button:hover {
   display: flex !important;
   align-items: center !important;
   justify-items: center !important;
   width: 100% !important;
   background-color: white !important;
   border-radius: 10px !important;
-}
+} */
 
 .color_primary {
   color: var(--primary);
 }
 
-.ps-menu-button:hover {
-  background-color: white !important;
+.css-y6nfyh>.ps-menu-button.ps-active,
+.css-14xmt93>.ps-menu-button.ps-active,
+.css-ewdv3l>.ps-menu-button.ps-active,
+.css-1654oxy>.ps-menu-button.ps-active,
+.css-16jesut>.ps-menu-button.focus,
+.css-16jesut>.ps-menu-button:active,
+.css-16jesut>.ps-menu-button:target,
+.css-16jesut>.ps-menu-button:focus-visible,
+.css-1t8x7v1 .ps-menu-button.ps-active,
+.css-1t8x7v1 .ps-menu-button:target,
+.css-1t8x7v1 .ps-menu-button:active,
+.css-1t8x7v1 .ps-menu-button:focus-visible,
+.css-1t8x7v1 .ps-menu-button:active {
+  background-color: #fafafa !important;
   border-radius: 10px !important;
+  font-family: 'inter_semibold' !important;
+}
+
+.css-14xmt93>.ps-menu-button:hover,
+.css-1tqrhto>.ps-menu-button:hover,
+.css-1654oxy>.ps-menu-button:hover,
+.css-16jesut>.ps-menu-button:hover,
+.css-1t8x7v1 .ps-menu-button:hover {
+  background-color: #f1f1f1 !important;
+  border-radius: 10px !important;
+  font-family: 'inter_semibold' !important;
 }
 
 .sidebar_main {
@@ -112,19 +221,21 @@
 }
 
 .css-12w9als {
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.25rem !important;
+  font-family: 'inter_medium';
+  font-size: 13px;
 }
 
 .css-z5rm24 .css-12w9als {
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
+  /* margin-top: 0.25rem; */
+  /* margin-bottom: 0.25rem; */
   color: #616161;
 }
 
 .css-z5rm24 .css-12w9als:hover {
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
+  /* margin-top: 0.25rem; */
+  /* margin-bottom: 0.25rem; */
   color: #303030;
 }
 
@@ -257,30 +368,43 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+.form-select,
 .form-control {
   color: var(--primary);
   border: 1px solid #8a8a8a !important;
-  border-radius: 0.7rem;
+  border-radius: 0.65rem;
+  min-height: 1.9rem;
+  font-size: 13px;
   background-color: #FAFAFA !important;
 
 }
 
+.form-select {
+  background-image: url(../assests/png/down.png) !important;
+  background-size: 0.8rem;
+}
+
+.form-select:focus,
 .form-control:focus {
   color: var(--bs-body-color);
   background-color: #FAFAFA !important;
-  border: 1px solid #303030 !important;
+  border: 0 !important;
   box-shadow: none !important;
+  caret-color: #303030 !important;
 }
 
+.price .form-select,
 .price .form-control {
-  min-height: 2.4rem;
+  min-height: 1.4rem;
   color: var(--primary);
+  font-size: 13px;
   border: 1px solid #8a8a8a !important;
-  border-radius: 0.4rem;
+  border-radius: 0.6rem;
   background-color: transparent !important;
 
 }
 
+.price .form-select:focus,
 .price .form-control:focus {
   color: var(--bs-body-color);
   background-color: transparent !important;
@@ -312,21 +436,9 @@ input[type="number"]::-webkit-outer-spin-button {
 p {
   font-size: 14px;
   font-family: 'inter_regular';
-  color: var(--primary);
+  /* color: var(--primary); */
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  color: var(--secondary);
-  /* font-size: .9rem; */
-  /* font-family: 'inter_regular'; */
-  margin: 0;
-}
 
 .extend {
   color: #DDDADD;
@@ -360,6 +472,19 @@ p {
   box-shadow: 0 0.0625rem 0 #00000012;
 }
 
+.innerCard2 {
+  border-radius: 0.75rem;
+  background-color: var(--white);
+  outline: 0.0625rem solid #0000;
+  /* padding: 1rem; */
+  overflow: clip;
+  box-shadow: 0 0.0625rem 0 #00000012;
+}
+
+.prodMain {
+  flex: 2 2 30rem;
+  min-width: 51%;
+}
 
 .prod {
   align-items: flex-start;
@@ -367,11 +492,37 @@ p {
   flex-wrap: wrap;
   justify-content: center;
 }
-
+[data-lock-scrolling] [data-lock-scrolling-wrapper]{
+  height: auto;
+}
+.status {
+  flex: 1 1 15rem;
+  min-width: 0;
+}
+.btn2_black{
+  color: white;
+  border: none;
+  border-radius: 0.65rem;
+  font-size: 13px;
+  padding: 0.5rem 0.75rem;
+  background-color: #242424;
+}
 .mainPage {
   margin: 0 auto;
   max-width: 62.375rem;
   padding: 0;
+}
+.ck-toolbar_grouping{
+width: 99% !important;
+}
+ .ck-editor__main{
+  width: 99% !important;
+}
+.AddProd {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .media {
@@ -399,19 +550,23 @@ p {
   text-decoration: underline !important;
 
 }
+
 .form-check-input:focus {
   border-color: #8a8a8a !important;
   outline: 0 !important;
   box-shadow: none !important;
 }
+
 .form-check-input:checked {
   background-color: #303030 !important;
   border-color: #8a8a8a !important;
 }
-.form-control:disabled{
+
+.form-control:disabled {
   background-color: #f2f2f2 !important;
   border-color: #f2f2f2 !important;
 }
+
 .ques {
   border: 2px solid #8a8a8a;
   color: #8a8a8a;
@@ -423,7 +578,70 @@ p {
   font-size: 0.9rem;
   display: flex;
   justify-content: center;
-  align-items:center ;
+  align-items: center;
   text-align: center;
+}
 
+.Polaris-Text--root_yj4ah {
+  margin: 0;
+  text-align: inherit
+}
+
+.Polaris-Text--visuallyHidden_yrtt6 {
+  border: 0 !important;
+  clip-path: inset(50%) !important;
+  height: .0625rem !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  top: 0;
+  white-space: nowrap !important;
+  width: .0625rem !important
+}
+
+.Polaris-Icon_yj27d {
+  display: block;
+  height: 1.25rem;
+  margin: auto;
+  max-height: 100%;
+  max-width: 100%;
+  width: 1.25rem
+}
+
+.Polaris-Icon_yj27d2 {
+  height: 1.25rem;
+  width: 1.25rem
+}
+
+.Polaris-Icon__Img_375hq,
+.Polaris-Icon__Svg_375hu {
+  display: block;
+  max-height: 100%;
+  max-width: 100%;
+  position: relative;
+  width: 100%
+}
+
+.link2:hover {
+  text-decoration: underline !important;
+  color: inherit;
+}
+
+.Polaris-Icon__Svg_375hu {
+  fill: #005bd3
+}
+
+.color2 {
+  color: #005bd3;
+}
+
+.home {
+  max-width: 49.75rem;
+}
+
+.homeFont {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-family: 'inter_semibold';
 }
