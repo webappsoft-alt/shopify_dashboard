@@ -16,10 +16,12 @@
     "next": "latest",
     "react": "latest",
     "react-bootstrap": "^2.9.0",
+    "react-data-table-component": "^7.5.4",
     "react-dom": "latest",
     "react-icons": "^4.11.0",
     "react-pro-sidebar": "^1.1.0-alpha.1",
-    "react-table": "^7.8.0"
+    "react-table": "^7.8.0",
+    "styled-components": "^6.1.0"
   },
   "devDependencies": {
     "autoprefixer": "latest",

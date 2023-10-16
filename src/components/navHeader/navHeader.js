@@ -7,7 +7,7 @@ import Image from "next/image";
 import { TopBar, ActionList, Icon, Frame, Text, AppProvider } from '@shopify/polaris';
 import { ArrowLeftMinor, QuestionMarkMajor } from '@shopify/polaris-icons';
 import { useState, useCallback } from 'react';
-const NavHeader = () => {
+const NavHeader = ({setToggle, toggle}) => {
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
     const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
     const [isSearchActive, setIsSearchActive] = useState(false);
@@ -35,10 +35,11 @@ const NavHeader = () => {
 
     const handleNavigationToggle = useCallback(() => {
         console.log('toggle navigation visibility');
-    }, []);
+        setToggle(!toggle)
+    }, [setToggle, toggle]);
 
     const logo = {
-        width: 100,
+        width: 85,
 
         topBarSource:`https://cdn.shopify.com/static/imagery-landing/shopify_monotone_white.svg`,
             // 'https://cdn.shopify.com/s/files/1/0446/6937/files/jaded-pixel-logo-color.svg?6215648040070010999',
@@ -103,7 +104,7 @@ const NavHeader = () => {
 
     const topBarMarkup = (
         <TopBar
-            showNavigationToggle
+            showNavigationToggle 
             userMenu={userMenuMarkup}
             secondaryMenu={secondaryMenuMarkup}
             searchResultsVisible={isSearchActive}

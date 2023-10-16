@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/components/style/main.css'
 import '@/components/style/font_Sizes.css'
 import '@shopify/polaris/build/esm/styles.css';
+import IndexLayout from '@/components/sidebar';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -17,13 +18,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavHeader />
+        {/* <NavHeader />
         <div className='flex'>
           <ShopifySidebar />
           <main className='w-full ' style={{backgroundColor:"#f1f1f1"}}>
             {children}
           </main>
-        </div>
+        </div> */}
+        <IndexLayout>
+          {children}
+        </IndexLayout>
       </body>
     </html>
   )
