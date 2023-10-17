@@ -1,7 +1,8 @@
 "use client"
 
-import DataTable from "@/components/pageComponents/dataTable";
+import CollectionDataTable from "@/components/pageComponents/collectionDataTable";
 import { AppProvider, Button } from "@shopify/polaris";
+import Link from "next/link";
 
 // import { IndexTable, IndexTableHeader, IndexTableItem } from '@shopify/polaris';
 const Collections = () => {
@@ -15,11 +16,11 @@ const Collections = () => {
                         <h4 className="inter_semibold text-xl flex gap-2 items-center">
                             Collections</h4>
                         <div>
-                            <Button variant="primary" >Create collection</Button>
+                           <Link href={'/products/create-collection'} > <Button variant="primary" >Create collection</Button></Link>
                         </div>
                     </div>
                     <div className="mt-3">
-                        <DataTable/>
+                        <CollectionDataTable/>
                     </div>
                 </div>
             </main>

@@ -76,16 +76,16 @@ const ShopifySidebar = ({ toggle, setToggle }) => {
                     Drafts
                   </MenuItem>
                   <MenuItem onClick={() => {
-                    setActiveMenuItem('inventory')
+                    setActiveMenuItem('abandoned')
                     setToggle(false)
-                  }} active={activeMenuItem === 'inventory'} className="px-0"
-                    component={<Link href={"/order/inventory"} />} >
-                    Inventory
+                  }} active={activeMenuItem === 'abandoned'} className="px-0"
+                    component={<Link href={"/order/abandoned-checkouts"} />} >
+                    Abandoned checkouts
                   </MenuItem>
                 </SubMenu>
                 <SubMenu onClick={() => {
-                    setActiveMenuItem('products')
-                  }} active={activeMenuItem === 'products'} icon={
+                  setActiveMenuItem('products')
+                }} active={activeMenuItem === 'products'} icon={
                   <span className="Polaris-Icon_yj27d">
                     <span
                       className="Polaris-Text--root_yj4ah Polaris-Text--visuallyHidden_yrtt6">
@@ -104,17 +104,16 @@ const ShopifySidebar = ({ toggle, setToggle }) => {
                     component={<Link href={"/products/collection"} />} >
                     Collections
                   </MenuItem>
-                  <MenuItem onClick={() => setToggle(false)} className="px-0"
-                    component={<Link href={"/products"} />} >
+                  <MenuItem onClick={() => {
+                    setActiveMenuItem('inventory')
+                    setToggle(false)
+                  }} active={activeMenuItem === 'inventory'} className="px-0"
+                    component={<Link href={"/order/inventory"} />} >
                     Inventory
                   </MenuItem>
                   <MenuItem onClick={() => setToggle(false)} className="px-0"
                     component={<Link href={"/products"} />}>
                     Purchase orders
-                  </MenuItem>
-                  <MenuItem onClick={() => setToggle(false)} className="px-0"
-                    component={<Link href={"/products"} />}>
-                    Transfers
                   </MenuItem>
                   <MenuItem onClick={() => setToggle(false)} className="px-0"
                     component={<Link href={"/products"} />} >
@@ -136,10 +135,10 @@ const ShopifySidebar = ({ toggle, setToggle }) => {
                     </svg>
                     {/* <svg viewBox="0 0 20 20" className="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fillRule="evenodd" d="M10 3a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm-2 3.5a2 2 0 1 1 4 0 2 2 0 0 1-4 0Z"></path><path fillRule="evenodd" d="M15.484 14.227a6.274 6.274 0 0 0-10.968 0l-.437.786a1.338 1.338 0 0 0 1.17 1.987h9.502a1.338 1.338 0 0 0 1.17-1.987l-.437-.786Zm-9.657.728a4.773 4.773 0 0 1 8.346 0l.302.545h-8.95l.302-.545Z"></path></svg> */}
                   </span>} component={<Link href={"/customers"} />} label="Customers" color="#616161">
-                  <MenuItem onClick={() => setToggle(false)} className="px-0"
+                  {/* <MenuItem onClick={() => setToggle(false)} className="px-0"
                     component={<Link href={"/"} />} >
                     Segements
-                  </MenuItem>
+                  </MenuItem> */}
                 </SubMenu>
                 <SubMenu icon={
                   <span className="Polaris-Icon_yj27d">

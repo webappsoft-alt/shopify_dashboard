@@ -16,10 +16,8 @@ import content from '@/components/assests/png/content.png'
 import en from "@shopify/polaris/locales/en.json";
 import Image from 'next/image';
 import { useState, useCallback, forwardRef } from 'react';
-import { useRouter } from 'next/navigation';
 
-const IndexTableWithViewsSearchFilterSorting = () => {
-  const router = useRouter()
+const CollectionDataTable = () => {
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const [itemStrings, setItemStrings] = useState([
     'All',
@@ -241,23 +239,17 @@ const IndexTableWithViewsSearchFilterSorting = () => {
   const orders = [
     {
       id: '1020',
+      title: 'HomePage',
       titleImage: content,
-      product: 'p1',
-      sku: 'No SKU',
-      unavailable: '0',
-      available: '10',
-      commited: '0',
-      onHand: '10',
+      product: '0',
+      productCondition: '0',
     },
     {
       id: '1030',
+      title: 'HomePage',
       titleImage: content,
-      product: 'p2',
-      sku: 'No SKU',
-      unavailable: '0',
-      available: '10',
-      commited: '0',
-      onHand: '10',
+      product: '0',
+      productCondition: '0',
     },
 
   ];
@@ -270,45 +262,57 @@ const IndexTableWithViewsSearchFilterSorting = () => {
     useIndexResourceState(orders);
 
   const rowMarkup = orders.map(
-    (items, index) => (
+    ({ id, title, titleImage, product, productCondition }, index) => (
       <IndexTable.Row
-        id={items.id}
-        key={items.id}
-        selected={selectedResources.includes(items.id)}
+        id={id}
+        key={id}
+        selected={selectedResources.includes(id)}
         position={index}
       >
         <IndexTable.Cell className='w-10'  >
-          <Image src={items.titleImage} alt='' className='w-8 object-contain' />
+          <Image src={titleImage} alt='' className='w-8 object-contain' />
         </IndexTable.Cell>
         <IndexTable.Cell>
           <Text variant="bodyMd" fontWeight="bold" as="span">
-            {items.product}
+            {title}
           </Text>
         </IndexTable.Cell>
-        <IndexTable.Cell>{items.sku}</IndexTable.Cell>
-        <IndexTable.Cell>{items.unavailable}</IndexTable.Cell>
-        <IndexTable.Cell>{items.commited}</IndexTable.Cell>
-        <IndexTable.Cell>{items.available}</IndexTable.Cell>
-        <IndexTable.Cell>{items.onHand}</IndexTable.Cell>
+        <IndexTable.Cell>
+          {product}
+        </IndexTable.Cell>
+        <IndexTable.Cell>{productCondition}</IndexTable.Cell>
       </IndexTable.Row>
     )
   );
-  const promotedBulkActions = [
-    {
-      content: 'Edit',
-      onAction: () => console.log('Todo: implement create shipping labels'),
-    },
-    {
-      content: 'Update',
-      onAction: () => console.log('Todo: implement mark as fulfilled'),
-    },
-    {
-      content: 'Create Purchase Order',
-      onAction: () => router.push('/order/create-purchase-order'),
-    
-    },
+  // const promotedBulkActions = [
+  //   {
+  //     content: 'Edit',
+  //     onAction: () => console.log('Todo: implement create shipping labels'),
+  //   },
+  //   {
+  //     content: 'Update',
+  //     onAction: () => console.log('Todo: implement mark as fulfilled'),
+  //   },
+  //   {
+  //     content: 'Create Purchase Order',
+  //     onAction: () => console.log('Todo: implement mark as fulfilled'),
+  //   },
 
-  ];
+  // ];
+  // const bulkActions = [
+  //   {
+  //     content: 'Add tags',
+  //     onAction: () => console.log('Todo: implement bulk add tags'),
+  //   },
+  //   {
+  //     content: 'Remove tags',
+  //     onAction: () => console.log('Todo: implement bulk remove tags'),
+  //   },
+  //   {
+  //     content: 'Delete customers',
+  //     onAction: () => console.log('Todo: implement bulk delete'),
+  //   },
+  // ];
 
   return (
     <div className=''>
@@ -345,16 +349,14 @@ const IndexTableWithViewsSearchFilterSorting = () => {
             itemCount={orders.length}
             selectedItemsCount={allResourcesSelected ? 'All' : selectedResources.length}
             onSelectionChange={handleSelectionChange}
-            hasMoreItems
-            promotedBulkActions={promotedBulkActions}
+            // hasMoreItems
+            // bulkActions={bulkActions}
+            // promotedBulkActions={promotedBulkActions}
             headings={[
               { title: '' },
+              { title: 'Title' },
               { title: 'Products' },
-              { title: 'SKU' },
-              { title: 'Unavailble' },
-              { title: 'Commited' },
-              { title: 'Available' },
-              { title: 'On hand' },
+              { title: 'Product conditions' },
             ]}
           >
             {rowMarkup}
@@ -385,6 +387,6 @@ const IndexTableWithViewsSearchFilterSorting = () => {
     }
   }
 }
-export default IndexTableWithViewsSearchFilterSorting;
+export default CollectionDataTable;
 
 

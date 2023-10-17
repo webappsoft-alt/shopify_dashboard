@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import NavHeader from "../navHeader/navHeader";
+// import ShopifySidebar from "./sidebar";
+import ShopifySidebar2 from "./shopifySidebar";
 import ShopifySidebar from "./sidebar";
 
 const IndexLayout = ({ children }) => {

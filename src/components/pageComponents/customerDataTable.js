@@ -2,8 +2,6 @@
 import {
   TextField,
   IndexTable,
-  IndexFilters,
-  useSetIndexFiltersMode,
   useIndexResourceState,
   Text,
   ChoiceList,
@@ -18,7 +16,7 @@ import Image from 'next/image';
 import { useState, useCallback, forwardRef } from 'react';
 import { useRouter } from 'next/navigation';
 
-const IndexTableWithViewsSearchFilterSorting = () => {
+const CustomerDataTable = () => {
   const router = useRouter()
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const [itemStrings, setItemStrings] = useState([
@@ -95,41 +93,12 @@ const IndexTableWithViewsSearchFilterSorting = () => {
     return true;
   };
 
-  const sortOptions = [
-    { label: 'Order', value: 'order asc', directionLabel: 'Ascending' },
-    { label: 'Order', value: 'order desc', directionLabel: 'Descending' },
-    { label: 'Customer', value: 'customer asc', directionLabel: 'A-Z' },
-    { label: 'Customer', value: 'customer desc', directionLabel: 'Z-A' },
-    { label: 'Date', value: 'date asc', directionLabel: 'A-Z' },
-    { label: 'Date', value: 'date desc', directionLabel: 'Z-A' },
-    { label: 'Total', value: 'total asc', directionLabel: 'Ascending' },
-    { label: 'Total', value: 'total desc', directionLabel: 'Descending' },
-  ];
-
-  const [sortSelected, setSortSelected] = useState(['order asc']);
-  const { mode, setMode } = useSetIndexFiltersMode();
-
-  const onHandleCancel = () => { };
-
+ 
   const onHandleSave = async () => {
     await sleep(1);
     return true;
   };
 
-  const primaryAction =
-    selected === 0
-      ? {
-        type: 'save-as',
-        onAction: onCreateNewView,
-        disabled: false,
-        loading: false,
-      }
-      : {
-        type: 'save',
-        onAction: onHandleSave,
-        disabled: false,
-        loading: false,
-      };
 
   const [accountStatus, setAccountStatus] = useState(undefined);
   const [moneySpent, setMoneySpent] = useState(undefined);
@@ -242,22 +211,18 @@ const IndexTableWithViewsSearchFilterSorting = () => {
     {
       id: '1020',
       titleImage: content,
-      product: 'p1',
-      sku: 'No SKU',
-      unavailable: '0',
-      available: '10',
-      commited: '0',
-      onHand: '10',
+      name: 'ABC',
+      email: 'email@gmial.com',
+      address: 'ADSC',
+      phone: '0300303000',
     },
     {
       id: '1030',
       titleImage: content,
-      product: 'p2',
-      sku: 'No SKU',
-      unavailable: '0',
-      available: '10',
-      commited: '0',
-      onHand: '10',
+      name: 'ABC',
+      email: 'email@gmial.com',
+      address: 'ADSC',
+      phone: '0300303000',
     },
 
   ];
@@ -278,83 +243,38 @@ const IndexTableWithViewsSearchFilterSorting = () => {
         position={index}
       >
         <IndexTable.Cell className='w-10'  >
-          <Image src={items.titleImage} alt='' className='w-8 object-contain' />
+          <Image src={items.titleImage} alt='' className='w-10 object-contain' />
         </IndexTable.Cell>
         <IndexTable.Cell>
           <Text variant="bodyMd" fontWeight="bold" as="span">
-            {items.product}
+            {items.name}
           </Text>
         </IndexTable.Cell>
-        <IndexTable.Cell>{items.sku}</IndexTable.Cell>
-        <IndexTable.Cell>{items.unavailable}</IndexTable.Cell>
-        <IndexTable.Cell>{items.commited}</IndexTable.Cell>
-        <IndexTable.Cell>{items.available}</IndexTable.Cell>
-        <IndexTable.Cell>{items.onHand}</IndexTable.Cell>
+        <IndexTable.Cell>{items.email}</IndexTable.Cell>
+        <IndexTable.Cell>{items.phone}</IndexTable.Cell>
+        <IndexTable.Cell>{items.address}</IndexTable.Cell>
       </IndexTable.Row>
     )
   );
-  const promotedBulkActions = [
-    {
-      content: 'Edit',
-      onAction: () => console.log('Todo: implement create shipping labels'),
-    },
-    {
-      content: 'Update',
-      onAction: () => console.log('Todo: implement mark as fulfilled'),
-    },
-    {
-      content: 'Create Purchase Order',
-      onAction: () => router.push('/order/create-purchase-order'),
-    
-    },
-
-  ];
 
   return (
     <div className=''>
       <AppProvider i18n={en} >
         <LegacyCard   >
-          <IndexFilters
-            sortOptions={sortOptions}
-            sortSelected={sortSelected}
-            queryValue={queryValue}
-            queryPlaceholder="Searching in all"
-            onQueryChange={handleFiltersQueryChange}
-            onQueryClear={() => { }}
-            onSort={setSortSelected}
-            primaryAction={primaryAction}
-            cancelAction={{
-              onAction: onHandleCancel,
-              disabled: false,
-              loading: false,
-            }}
-            tabs={tabs}
-            selected={selected}
-            onSelect={setSelected}
-            canCreateNewView
-            onCreateNewView={onCreateNewView}
-            filters={filters}
-            appliedFilters={appliedFilters}
-            onClearAll={handleFiltersClearAll}
-            mode={mode}
-            setMode={setMode}
-          />
+         
           <IndexTable
-            selectable
+            selectable={false}
             resourceName={resourceName}
             itemCount={orders.length}
             selectedItemsCount={allResourcesSelected ? 'All' : selectedResources.length}
             onSelectionChange={handleSelectionChange}
-            hasMoreItems
-            promotedBulkActions={promotedBulkActions}
+          
             headings={[
               { title: '' },
-              { title: 'Products' },
-              { title: 'SKU' },
-              { title: 'Unavailble' },
-              { title: 'Commited' },
-              { title: 'Available' },
-              { title: 'On hand' },
+              { title: 'Name' },
+              { title: 'Email' },
+              { title: 'Phone' },
+              { title: 'Address' },
             ]}
           >
             {rowMarkup}
@@ -385,6 +305,6 @@ const IndexTableWithViewsSearchFilterSorting = () => {
     }
   }
 }
-export default IndexTableWithViewsSearchFilterSorting;
+export default CustomerDataTable;
 
 

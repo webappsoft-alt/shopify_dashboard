@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className="2xl:container mx-auto grid">
       <div className='container grid mx-auto'>
-     
+        Enter
       </div>
     </main>
   )

@@ -1,4 +1,5 @@
 'use client'
+import CustomerDataTable from "@/components/pageComponents/customerDataTable";
 import { AppProvider, Button } from "@shopify/polaris";
 import Link from "next/link";
 
@@ -8,8 +9,9 @@ const Customers = () => {
             <div className="2xl:container grid mx-auto">
                 <div className="container grid mx-auto ">
                     <div className="mt-3 px-3">
-                        <h5 className="font-bold">Customers</h5>
-                        <div className="bg-white mt-4 customer_height rounded-xl shadow1 p-4" >
+                        <h5 className="font-bold mb-3  text-lg roboto_medium">Customers</h5>
+                        <CustomerDataTable/>
+                        {/* <div className="bg-white mt-4 customer_height rounded-xl shadow1 p-4" >
                             <div className="h-full w-full flex-col flex justify-center items-center">
                                 <div className="avatar">
 
@@ -21,16 +23,10 @@ const Customers = () => {
                                 <div className="flex gap-3 mt-3">
                                     <Button>Import Customers</Button>
                                     <Button variant="primary" > Add Customers</Button>
-                                    {/* <button className="btn1 rounded-xl shadow2">
-                                        Import Customers
-                                    </button>
-                                    <button className="btn1 rounded-xl bg-black text-white shadow1">
-                                        Add Customers
-                                    </button> */}
                                 </div>
                             </div>
                         </div>
-                        <div className="mt-3 text-center pt-3">Learn more about <Link href={'/'}>customers</Link></div>
+                        <div className="mt-3 text-center pt-3">Learn more about <Link href={'/'}>customers</Link></div> */}
                     </div>
                 </div>
             </div>
