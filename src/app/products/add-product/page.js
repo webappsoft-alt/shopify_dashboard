@@ -1,30 +1,17 @@
 "use client"
 import { Col, Form, Row } from 'react-bootstrap';
 import { HiMiniArrowSmallLeft } from 'react-icons/hi2'
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import dynamic from "next/dynamic";
+const Editor = dynamic(() => import("@/components/pageComponents/Editor"), { ssr: false });
 
 const Page = () => {
     const [color, setColor] = useState(false)
     const router = useRouter()
-
     const [description, setDescription] = useState('');
-    const handleCKEditor = (event, editor) => {
-        const data = editor.getData();
-        setDescription(data)
-    }
-    const editorRef = useRef();
-    // const { CKEditor, ClassicEditor} = editorRef.current || {}
-    useEffect(() => {
-        editorRef.current = {
-            CKEditor: require("@ckeditor/ckeditor5-react").CKEditor,
-            ClassicEditor: require("@ckeditor/ckeditor5-build-classic"),
-        };
-    }, []);
-
+   
     return (
         <main className="container px-4">
             <div className='mainPage'>
@@ -32,7 +19,7 @@ const Page = () => {
                     <h4 className="inter_semibold text-xl flex gap-2 items-center"> <span onClick={() => router.push('/home')}><HiMiniArrowSmallLeft className='font-bold' /></span>
                         Add Product</h4>
                 </div>
-                <div className='AddProd mb-10'>
+                <div className='AddProd mb-10 relative z-50'>
                     <div className='prodMain'>
                         <div className='prod'>
                             <div className='cardMain'>
@@ -49,35 +36,7 @@ const Page = () => {
                                         </Form.Group>
                                         <Form.Group className="">
                                             <Form.Label className='color_primary m-0 mb-1' style={{ fontSize: "13px" }}>Description</Form.Label>
-                                            <CKEditor
-                                                editor={ClassicEditor}
-                                                data={description}
-                                                config={{
-                                                    toolbar: [
-                                                        'heading',
-                                                        '|',
-                                                        'bold',
-                                                        'italic',
-                                                        'underline',
-                                                        'color',
-                                                        '|',
-                                                        'imageTextAlternative',
-                                                        'imageUpload',
-                                                        'imageStyle:full',
-                                                        'imageStyle:side',
-                                                        '|',
-                                                        'mediaEmbed',
-                                                        'insertTable',
-                                                        'tableColumn',
-                                                        'tableRow',
-                                                        'mergeTableCells',
-                                                        '|',
-                                                        'undo',
-                                                        'redo',
-                                                    ],
-                                                }}
-                                                onChange={handleCKEditor}
-                                            />
+                                           <Editor onChange={setDescription} value={description} ></Editor>
                                         </Form.Group>
                                     </Form>
                                 </div>
@@ -223,7 +182,7 @@ const Page = () => {
                                                         <Form.Select>
                                                             <option>lb</option>
                                                             <option>oz</option>
-                                                            <option selected>Kg</option>
+                                                            <option >Kg</option>
                                                             <option>g</option>
                                                         </Form.Select>
                                                     </div>
@@ -252,7 +211,7 @@ const Page = () => {
                                                     <Form.Label className='color_primary m-0 mb-1' style={{ fontSize: "13px" }}>Option name</Form.Label>
                                                     <div className='relative'>
                                                         <Form.Select>
-                                                            <option selected>Size</option>
+                                                            <option >Size</option>
                                                             <option>Color</option>
                                                             <option >Material</option>
                                                             <option>Style</option>
@@ -300,7 +259,7 @@ const Page = () => {
                                     <Form.Label className='color_primary  inter_semibold m-0 mb-2' style={{ fontSize: "13px" }}>Status</Form.Label>
                                     <div className='relative'>
                                         <Form.Select>
-                                            <option selected>Active</option>
+                                            <option >Active</option>
                                             <option>Draft</option>
                                         </Form.Select>
                                     </div>
