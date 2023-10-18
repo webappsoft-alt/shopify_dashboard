@@ -20,7 +20,7 @@ function isValueInvalid(content) {
 const Page = () => {
 
     const [description, setDescription] = useState('');
-   
+   const router = useRouter()
     const [value, setValue] = useState('');
     const [valueMenu2, setValueMenu2] = useState('');
     const [textFieldValue, setTextFieldValue] = useState('');
@@ -58,67 +58,7 @@ const Page = () => {
         : '';
 
 
-    const formGroupMarkup = (
-        <>
-            <Text>
-                Conditions
-            </Text>
-            <div className='my-3'>
-                <LegacyStack alignment="center" spacing="loose" >
-                    <Text>Product must match: </Text>
-                    <RadioButton
-                        label="all conditions"
-                        checked={valueMenu2 === 'allCondition'}
-                        id="allCondition"
-                        name="conditions"
-                        onChange={handleChange2}
-                    />
-                    <RadioButton
-                        label="any condition"
-                        id="anyCondition"
-                        name="conditions"
-                        checked={valueMenu2 === 'anyCondition'}
-                        onChange={handleChange2}
-                    />
-                </LegacyStack>
-            </div>
-            <LegacyStack wrap={false} alignment="leading" spacing="loose">
-                <LegacyStack.Item fill>
-                    <FormLayout>
-                        <FormLayout.Group condensed>
-                            <Select
-                                labelHidden
-                                label="Collection rule type"
-                                options={['Product type']}
-                                value={selectTypeValue}
-                                onChange={handleSelectTypeChange}
-                            />
-                            <Select
-                                labelHidden
-                                label="Collection rule condition"
-                                options={['is equal to']}
-                                value={selectConditionValue}
-                                onChange={handleSelectConditionChange}
-                            />
-                            <TextField
-                                labelHidden
-                                label="Collection rule content"
-                                error={isInvalid}
-                                id={textFieldID}
-                                value={textFieldValue}
-                                onChange={handleTextFieldValueChange}
-                                autoComplete="off"
-                            />
-                        </FormLayout.Group>
-                    </FormLayout>
-                    <div style={{ marginTop: '4px' }}>
-                        <InlineError message={errorMessage} fieldID={textFieldID} />
-                    </div>
-                </LegacyStack.Item>
-                {/* <Button icon={DeleteMinor} accessibilityLabel="Remove item" /> */}
-            </LegacyStack>
-        </>
-    );
+
     return (
         <main className="container px-4">
             <div className='mainPage'>

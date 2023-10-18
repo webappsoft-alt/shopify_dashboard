@@ -80,8 +80,8 @@ const Page = () => {
                             <div className='prod'>
                                 <div className='cardMain'>
                                     <div className='innerCard mb-3'>
-                                        <div className='flex gap-3 items-stretch border-b pb-2'>
-                                            <div className='w-50 border-e customSelect z-50 relative'>
+                                        <div className='flex gap-3 max-[992px]:flex-wrap items-stretch max-[992px]:justify-center border-b pb-2'>
+                                            <div className='w-50 min-[992px]:border-e  customSelect z-50 relative'>
                                                 <h6 className='text-base inter_bold'>
                                                     Supplier
                                                 </h6>
@@ -105,8 +105,8 @@ const Page = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className='flex justify-between gap-4 mt-3' >
-                                            <div className='w-50'>
+                                        <div className='flex justify-between  max-[520px]:flex-wrap gap-4 mt-3' >
+                                            <div className='min-[520px]:w-50 max-[520px]:w-100'>
                                                 <Select
                                                     label="Payment Terms"
                                                     options={options}
@@ -115,7 +115,7 @@ const Page = () => {
 
                                                 />
                                             </div>
-                                            <div className='w-50'>
+                                            <div className='min-[520px]:w-50 max-[520px]:w-100'>
                                                 <Select
                                                     label="Supplier Currency"
                                                     options={options2}
@@ -131,7 +131,7 @@ const Page = () => {
                                 <div className='inter_semibold '>
                                     Shipment details
                                 </div>
-                                <div className='mt-3 flex gap-3 w-full'>
+                                <div className='mt-3 max-[550px]:flex-wrap flex gap-3 w-full'>
                                     <div className='w-full'>
                                         <TextField
                                             label="Estimated Arival"
@@ -197,7 +197,7 @@ const Page = () => {
                                 </div>
 
                             </div>
-                            <div className=' flex gap-4 items-start'>
+                            <div className=' flex min-[992px]:gap-4 items-start max-[992px]:gap-1 max-[992px]:flex-wrap'>
                                 <div className='innerCard mt-1 mb-3 w-full'>
                                     <Text>
                                         Additional details

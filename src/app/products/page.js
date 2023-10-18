@@ -19,7 +19,7 @@ const Products = () => {
                                     <div className="w-2/4 f13 text-center px-4" style={{ color: "#787878" }} >
                                         Before you open your store, first you need some products.
                                     </div>
-                                    <div className="flex gap-3 mt-3">
+                                    <div className="flex gap-3 flex-wrap justify-center mt-3">
                                         <Button>Find products to sell</Button>
                                         <Button>Import products</Button>
                                         <Link href={'/products/add-product'} >  <Button variant="primary"  >Add your products</Button></Link>

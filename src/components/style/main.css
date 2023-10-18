@@ -20,7 +20,9 @@
 .inter_bold {
   font-family: 'inter_bold';
 }
-
+.Polaris-Button--plain.Polaris-Button--critical {
+  color: rgba(0, 91, 211, 1) !important;
+}
 .color1 {
   color: #303030;
 }

@@ -15,8 +15,8 @@ const ShopifySidebar = ({ toggle, setToggle }) => {
     <>
       <div className=" sticky top-14" style={{ height: "92.7vh", zIndex: "200" }} >
 
-        <Sidebar className="h-full sidebar_main" toggled={toggle} breakPoint="lg" width="240px" color="#ebebeb" backgroundColor="#ebebeb" >
-          <div className="flex flex-col  pt-lg-3 max-[992px]:pt-16 justify-between h-full">
+        <Sidebar className="h-full sidebar_main" onBackdropClick={()=>setToggle(false)} toggled={toggle} breakPoint="md" width="240px" color="#ebebeb" backgroundColor="#ebebeb" >
+          <div className="flex flex-col  pt-md-3 max-[768px]:pt-16 justify-between h-full">
             <div className="h-full ">
               <Menu className="padd_inline pb-2" >
                 <MenuItem onClick={() => {

@@ -14,7 +14,7 @@ const IndexLayout = ({ children }) => {
             <NavHeader setToggle={setToggle} toggle={toggle} />
             <div className='flex'>
                 <Sidebar setToggle={setToggle}   toggle={toggle} />
-                <main className='w-full ' style={{ backgroundColor: "#f1f1f1" }}>
+                <main className='w-full overflow-x-auto' style={{ backgroundColor: "#f1f1f1" }}>
                     {children}
                 </main>
             </div>
