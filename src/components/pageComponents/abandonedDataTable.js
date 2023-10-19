@@ -2,7 +2,6 @@
 import {
   TextField,
   IndexTable,
-  LegacyCard,
   IndexFilters,
   useSetIndexFiltersMode,
   useIndexResourceState,
@@ -11,20 +10,21 @@ import {
   RangeSlider,
   Badge,
   AppProvider,
+  LegacyCard,
 } from '@shopify/polaris';
+import content from '@/components/assests/png/content.png'
 import en from "@shopify/polaris/locales/en.json";
-import { useState, useCallback } from 'react';
+import Image from 'next/image';
+import { useState, useCallback, forwardRef } from 'react';
+import { useRouter } from 'next/navigation'
 
-const OrderDataTable = () => {
-  const sleep = (ms) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
+const AbandonedCheckouts = () => {
+  const router = useRouter()
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const [itemStrings, setItemStrings] = useState([
     'All',
-    'Unfulfilled',
-    'Unpaid',
-    'Open',
-    'Closed',
   ]);
+  const [sortedRows, setSortedRows] = useState(null);
   const deleteView = (index) => {
     const newItemStrings = [...itemStrings];
     newItemStrings.splice(index, 1);
@@ -85,13 +85,16 @@ const OrderDataTable = () => {
           },
         ],
   }));
+
   const [selected, setSelected] = useState(0);
+
   const onCreateNewView = async (value) => {
     await sleep(500);
     setItemStrings([...itemStrings, value]);
     setSelected(itemStrings.length);
     return true;
   };
+
   const sortOptions = [
     { label: 'Order', value: 'order asc', directionLabel: 'Ascending' },
     { label: 'Order', value: 'order desc', directionLabel: 'Descending' },
@@ -102,8 +105,10 @@ const OrderDataTable = () => {
     { label: 'Total', value: 'total asc', directionLabel: 'Ascending' },
     { label: 'Total', value: 'total desc', directionLabel: 'Descending' },
   ];
+
   const [sortSelected, setSortSelected] = useState(['order asc']);
   const { mode, setMode } = useSetIndexFiltersMode();
+
   const onHandleCancel = () => { };
 
   const onHandleSave = async () => {
@@ -125,37 +130,22 @@ const OrderDataTable = () => {
         disabled: false,
         loading: false,
       };
+
   const [accountStatus, setAccountStatus] = useState(undefined);
   const [moneySpent, setMoneySpent] = useState(undefined);
   const [taggedWith, setTaggedWith] = useState('');
   const [queryValue, setQueryValue] = useState('');
 
-  const handleAccountStatusChange = useCallback(
-    (value) => setAccountStatus(value),
-    [],
-  );
-  const handleMoneySpentChange = useCallback(
-    (value) => setMoneySpent(value),
-    [],
-  );
-  const handleTaggedWithChange = useCallback(
-    (value) => setTaggedWith(value),
-    [],
-  );
-  const handleFiltersQueryChange = useCallback(
-    (value) => setQueryValue(value),
-    [],
-  );
-  const handleAccountStatusRemove = useCallback(
-    () => setAccountStatus(undefined),
-    [],
-  );
-  const handleMoneySpentRemove = useCallback(
-    () => setMoneySpent(undefined),
-    [],
-  );
+  const handleAccountStatusChange = useCallback((value) => setAccountStatus(value), []);
+  const handleMoneySpentChange = useCallback((value) => setMoneySpent(value), []);
+  const handleTaggedWithChange = useCallback((value) => setTaggedWith(value), []);
+  const handleFiltersQueryChange = useCallback((value) => setQueryValue(value), []);
+
+  const handleAccountStatusRemove = useCallback(() => setAccountStatus(undefined), []);
+  const handleMoneySpentRemove = useCallback(() => setMoneySpent(undefined), []);
   const handleTaggedWithRemove = useCallback(() => setTaggedWith(''), []);
   const handleQueryValueRemove = useCallback(() => setQueryValue(''), []);
+
   const handleFiltersClearAll = useCallback(() => {
     handleAccountStatusRemove();
     handleMoneySpentRemove();
@@ -251,43 +241,25 @@ const OrderDataTable = () => {
   const orders = [
     {
       id: '1020',
-      order: (
-        <Text as="span" variant="bodyMd" fontWeight="semibold">
-          #1020
-        </Text>
-      ),
-      date: 'Jul 20 at 4:34pm',
-      customer: 'Jaydon Stanton',
-      total: '$969.44',
-      paymentStatus: <Badge progress="complete">Paid</Badge>,
-      fulfillmentStatus: <Badge progress="incomplete">Unfulfilled</Badge>,
+      titleImage: content,
+      product: 'p1',
+      sku: 'No SKU',
+      unavailable: '0',
+      available: '10',
+      commited: '0',
+      onHand: '10',
     },
     {
-      id: '1019',
-      order: (
-        <Text as="span" variant="bodyMd" fontWeight="semibold">
-          #1019
-        </Text>
-      ),
-      date: 'Jul 20 at 3:46pm',
-      customer: 'Ruben Westerfelt',
-      total: '$701.19',
-      paymentStatus: <Badge progress="partiallyComplete">Partially paid</Badge>,
-      fulfillmentStatus: <Badge progress="incomplete">Unfulfilled</Badge>,
+      id: '1030',
+      titleImage: content,
+      product: 'p2',
+      sku: 'No SKU',
+      unavailable: '0',
+      available: '10',
+      commited: '0',
+      onHand: '10',
     },
-    {
-      id: '1018',
-      order: (
-        <Text as="span" variant="bodyMd" fontWeight="semibold">
-          #1018
-        </Text>
-      ),
-      date: 'Jul 20 at 3.44pm',
-      customer: 'Leo Carder',
-      total: '$798.24',
-      paymentStatus: <Badge progress="complete">Paid</Badge>,
-      fulfillmentStatus: <Badge progress="incomplete">Unfulfilled</Badge>,
-    },
+
   ];
   const resourceName = {
     singular: 'order',
@@ -298,7 +270,7 @@ const OrderDataTable = () => {
     useIndexResourceState(orders);
 
   const rowMarkup = orders.map(
-    (items, index,) => (
+    (items, index) => (
       <IndexTable.Row
         id={items.id}
         key={items.id}
@@ -307,71 +279,77 @@ const OrderDataTable = () => {
       >
         <IndexTable.Cell>
           <Text variant="bodyMd" fontWeight="bold" as="span">
-            {items.order}
+            {items.product}
           </Text>
         </IndexTable.Cell>
-        <IndexTable.Cell>{items.date}</IndexTable.Cell>
-        <IndexTable.Cell>{items.customer}</IndexTable.Cell>
-        <IndexTable.Cell>{items.channel}</IndexTable.Cell>
-        <IndexTable.Cell>{items.total}</IndexTable.Cell>
-        <IndexTable.Cell>{items.paymentStatus}</IndexTable.Cell>
-        <IndexTable.Cell>{items.fulfillmentStatus}</IndexTable.Cell>
+        <IndexTable.Cell>{items.sku}</IndexTable.Cell>
+        <IndexTable.Cell>{items.unavailable}</IndexTable.Cell>
+        <IndexTable.Cell>{items.commited}</IndexTable.Cell>
+        <IndexTable.Cell>{items.available}</IndexTable.Cell>
       </IndexTable.Row>
-    ),
+    )
   );
+  const promotedBulkActions = [
+    {
+      content: 'Archive checkouts',
+      onAction: () => console.log('Todo: implement create shipping labels'),
+    },
+    {
+      content: 'Unarchive checkouts',
+      onAction: () => console.log('Todo: implement mark as fulfilled'),
+    },
+  ];
 
   return (
-    <AppProvider  i18n={en}>
-      <LegacyCard>
-        <IndexFilters
-          sortOptions={sortOptions}
-          sortSelected={sortSelected}
-          queryValue={queryValue}
-          queryPlaceholder="Searching in all"
-          onQueryChange={handleFiltersQueryChange}
-          onQueryClear={() => { }}
-          onSort={setSortSelected}
-          primaryAction={primaryAction}
-          cancelAction={{
-            onAction: onHandleCancel,
-            disabled: false,
-            loading: false,
-          }}
-          tabs={tabs}
-          selected={selected}
-          onSelect={setSelected}
-          canCreateNewView
-          onCreateNewView={onCreateNewView}
-          filters={filters}
-          appliedFilters={appliedFilters}
-          onClearAll={handleFiltersClearAll}
-          mode={mode}
-          setMode={setMode}
-          loading={false}
-        />
-        <IndexTable
-          resourceName={resourceName}
-          itemCount={orders.length}
-          selectedItemsCount={
-            allResourcesSelected ? 'All' : selectedResources.length
-          }
-          onSelectionChange={handleSelectionChange}
-          headings={[
-            { title: 'Order' },
-            { title: 'Date' },
-            { title: 'Customer' },
-            { title: 'Channel' },
-            { title: 'Total' },
-            { title: 'Payment status' },
-            { title: 'Items' },
-            { title: 'Delivery status' },
-            { title: 'Delivery Method' },
-          ]}
-        >
-          {rowMarkup}
-        </IndexTable>
-      </LegacyCard>
-    </AppProvider>
+    <div className=''>
+      <AppProvider i18n={en} >
+        <LegacyCard   >
+          <IndexFilters
+            sortOptions={sortOptions}
+            sortSelected={sortSelected}
+            queryValue={queryValue}
+            queryPlaceholder="Searching in all"
+            onQueryChange={handleFiltersQueryChange}
+            onQueryClear={() => { }}
+            onSort={setSortSelected}
+            primaryAction={primaryAction}
+            cancelAction={{
+              onAction: onHandleCancel,
+              disabled: false,
+              loading: false,
+            }}
+            tabs={tabs}
+            selected={selected}
+            onSelect={setSelected}
+            canCreateNewView
+            onCreateNewView={onCreateNewView}
+            filters={filters}
+            appliedFilters={appliedFilters}
+            onClearAll={handleFiltersClearAll}
+            mode={mode}
+            setMode={setMode}
+          />
+          <IndexTable
+            selectable
+            resourceName={resourceName}
+            itemCount={orders.length}
+            selectedItemsCount={allResourcesSelected ? 'All' : selectedResources.length}
+            onSelectionChange={handleSelectionChange}
+            hasMoreItems
+            promotedBulkActions={promotedBulkActions}
+            headings={[
+              { title: 'Checkouts' },
+              { title: 'Date' },
+              { title: 'Placed By' },
+              { title: 'Recovery Status' },
+              { title: 'Total' },
+            ]}
+          >
+            {rowMarkup}
+          </IndexTable>
+        </LegacyCard>
+      </AppProvider>
+    </div>
   );
 
   function disambiguateLabel(key, value) {
@@ -381,7 +359,7 @@ const OrderDataTable = () => {
       case 'taggedWith':
         return `Tagged with ${value}`;
       case 'accountStatus':
-        return (value).map((val) => `Customer ${val}`).join(', ');
+        return value.map((val) => `Customer ${val}`).join(', ');
       default:
         return value;
     }
@@ -395,5 +373,6 @@ const OrderDataTable = () => {
     }
   }
 }
+export default AbandonedCheckouts;
 
-export default OrderDataTable
+

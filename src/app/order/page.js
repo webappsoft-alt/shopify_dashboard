@@ -10,7 +10,7 @@ const Page = () => {
     return (
         <div className="2xl:container grid mx-auto">
             <div className="container grid mx-auto ">
-                <AppProvider>
+                <AppProvider i18n={en}>
                     <div className="mt-3 px-3">
                         <div className="flex items-center justify-between gap-4 flex-wrap">
                             <h4 className="inter_semibold text-xl flex gap-2 items-center">

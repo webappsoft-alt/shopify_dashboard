@@ -9,6 +9,7 @@ import { useCallback } from 'react';
 import { DeleteMinor } from '@shopify/polaris-icons';
 import dynamic from "next/dynamic";
 const Editor = dynamic(() => import("@/components/pageComponents/Editor"), { ssr: false });
+import en from "@shopify/polaris/locales/en.json";
 
 function isValueInvalid(content) {
     if (!content) {
@@ -66,7 +67,7 @@ const Page = () => {
                     <h4 className="inter_semibold text-xl flex gap-2 items-center"> <div className='cursor-pointer' onClick={() => router.back()}><HiMiniArrowSmallLeft className='font-bold' /></div>
                         Create Collection</h4>
                 </div>
-                <AppProvider>
+                <AppProvider i18n={en}>
                     <div className='AddProd mb-10'>
                         <div className='prodMain'>
                             <div className='prod'>

@@ -611,6 +611,12 @@ width: 99% !important;
   width: 1.25rem
 }
 
+.search_product .Polaris-Popover__PopoverOverlay--open{
+  top: 50px !important;
+  left: 15px !important;
+  right: 0 !important;
+}
+
 .Polaris-Icon_yj27d2 {
   height: 1.25rem;
   width: 1.25rem

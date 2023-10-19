@@ -1,6 +1,6 @@
 "use client"
 
-import DataTable from "@/components/pageComponents/dataTable";
+import AbandonedCheckouts from "@/components/pageComponents/abandonedDataTable";
 
 // import { IndexTable, IndexTableHeader, IndexTableItem } from '@shopify/polaris';
 const Inventory = () => {
@@ -15,7 +15,7 @@ const Inventory = () => {
                             Abandoned Checkouts</h4>
                     </div>
                     <div className="mt-3">
-                        <DataTable />
+                        <AbandonedCheckouts/>
                     </div>
                 </div>
             </main>

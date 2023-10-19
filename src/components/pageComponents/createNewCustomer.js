@@ -1,7 +1,9 @@
-import { LegacyStack, Modal, Scrollable, Select, Text } from "@shopify/polaris";
+import { AppProvider, LegacyStack, Modal, Scrollable, Select, Text } from "@shopify/polaris";
 
 import { Form, FormLayout, Checkbox, TextField, Button } from '@shopify/polaris';
 import { useState, useCallback } from 'react';
+import en from "@shopify/polaris/locales/en.json";
+
 
 const CreateNewCustomer = ({ active, toggleModal }) => {
     const [newsletter, setNewsletter] = useState(false);
@@ -29,7 +31,7 @@ const CreateNewCustomer = ({ active, toggleModal }) => {
     const handleEmailChange = useCallback((value) => setEmail(value), []);
 
     return (
-        <div>
+        <AppProvider i18n={en}>
             <Modal
                 // activator={active}
                 open={active}
@@ -156,7 +158,7 @@ const CreateNewCustomer = ({ active, toggleModal }) => {
                     </LegacyStack>
                 </Modal.Section>
             </Modal>
-        </div>
+        </AppProvider>
     );
 }
 

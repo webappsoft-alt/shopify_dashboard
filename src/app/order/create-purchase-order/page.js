@@ -9,6 +9,8 @@ import { useCallback } from 'react';
 import { SearchMinor } from '@shopify/polaris-icons';
 import { Autocomplete, Icon } from '@shopify/polaris';
 import { DataTable } from '@shopify/polaris';
+import en from "@shopify/polaris/locales/en.json";
+
 const Page = () => {
     const router = useRouter()
     const [value, setValue] = useState()
@@ -74,7 +76,7 @@ const Page = () => {
                     <h4 className="inter_semibold text-xl flex gap-2 items-center"> <div className='cursor-pointer' onClick={() => router.back()}><HiMiniArrowSmallLeft className='font-bold' /></div>
                         Create Purchase Order</h4>
                 </div>
-                <AppProvider>
+                <AppProvider i18n={en}>
                     <div className='AddProd mb-10'>
                         <div className='prodMain'>
                             <div className='prod'>

@@ -1,11 +1,12 @@
 'use client'
 import { AppProvider, Button } from "@shopify/polaris";
 import Link from "next/link";
+import en from "@shopify/polaris/locales/en.json";
 
 const Products = () => {
     return (
         <div>
-            <AppProvider>
+            <AppProvider i18n={en}>
                 <div className="2xl:container grid mx-auto">
                     <div className="container grid mx-auto ">
                         <div className="mt-3 px-3">

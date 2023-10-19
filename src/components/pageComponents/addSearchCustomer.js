@@ -1,8 +1,10 @@
-import { Autocomplete, Icon, Text, TextField } from '@shopify/polaris';
+import { AppProvider, Autocomplete, Icon, Text, TextField } from '@shopify/polaris';
 import { SearchMinor, CirclePlusMinor } from '@shopify/polaris-icons';
 import { useRouter } from 'next/navigation';
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import CreateNewCustomer from './createNewCustomer';
+import en from "@shopify/polaris/locales/en.json";
+
 
 
 function AddSearchCustomer({ setOpen }) {
@@ -43,9 +45,9 @@ function AddSearchCustomer({ setOpen }) {
             document.removeEventListener('click', handleClickOutside);
         };
     }, [focus]);
-    // const [selectedOptions, setSelectedOptions] = useState([]);
-    // const [inputValue, setInputValue] = useState('');
-    // const [options, setOptions] = useState(deselectedOptions);
+    const [selectedOptions, setSelectedOptions] = useState([]);
+    const [inputValue, setInputValue] = useState('');
+    const [options, setOptions] = useState(deselectedOptions);
    
 
     const [loading, setLoading] = useState(false);
@@ -53,58 +55,58 @@ function AddSearchCustomer({ setOpen }) {
         (newValue) => setSearchValue(newValue),
         [],
     );
-    // const updateText = useCallback(
-    //     (value) => {
-    //         setInputValue(value);
+    const updateText = useCallback(
+        (value) => {
+            setInputValue(value);
 
-    //         if (!loading) {
-    //             setLoading(true);
-    //         }
+            if (!loading) {
+                setLoading(true);
+            }
 
-    //         setTimeout(() => {
-    //             if (value === '') {
-    //                 setOptions(deselectedOptions);
-    //                 setLoading(false);
-    //                 return;
-    //             }
-    //             const filterRegex = new RegExp(value, 'i');
-    //             const resultOptions = options.filter((option) =>
-    //                 option.label.match(filterRegex),
-    //             );
-    //             setOptions(resultOptions);
-    //             setLoading(false);
-    //         }, 300);
-    //     },
-    //     [deselectedOptions, loading, options],
-    // );
+            setTimeout(() => {
+                if (value === '') {
+                    setOptions(deselectedOptions);
+                    setLoading(false);
+                    return;
+                }
+                const filterRegex = new RegExp(value, 'i');
+                const resultOptions = options.filter((option) =>
+                    option.label.match(filterRegex),
+                );
+                setOptions(resultOptions);
+                setLoading(false);
+            }, 300);
+        },
+        [deselectedOptions, loading, options],
+    );
 
-    // const updateSelection = useCallback(
-    //     (selected) => {
-    //         const selectedText = selected.map((selectedItem) => {
-    //             const matchedOption = options.find((option) => {
-    //                 return option.value.match(selectedItem);
-    //             });
-    //             return matchedOption && matchedOption.label;
-    //         });
-    //         setSelectedOptions(selected);
-    //         setInputValue(selectedText[0] || '');
-    //     },
-    //     [options],
-    // );
+    const updateSelection = useCallback(
+        (selected) => {
+            const selectedText = selected.map((selectedItem) => {
+                const matchedOption = options.find((option) => {
+                    return option.value.match(selectedItem);
+                });
+                return matchedOption && matchedOption.label;
+            });
+            setSelectedOptions(selected);
+            setInputValue(selectedText[0] || '');
+        },
+        [options],
+    );
 
-    // const textField = (
-    //     <Autocomplete.TextField
-    //         onChange={updateText}
-    //         label="Customer"
-    //         value={inputValue}
-    //         prefix={<Icon source={SearchMinor} />}
-    //         placeholder="Search"
-    //         autoComplete="off"
-    //     />
-    // );
+    const textField = (
+        <Autocomplete.TextField
+            onChange={updateText}
+            label="Customer"
+            value={inputValue}
+            prefix={<Icon source={SearchMinor} />}
+            placeholder="Search"
+            autoComplete="off"
+        />
+    );
 
     return (
-        <div className=''>
+        <AppProvider className='' i18n={en}>
             <CreateNewCustomer active={active} toggleModal={toggleModal} />
             <div className='w-full'>
                 <Text>
@@ -161,7 +163,7 @@ function AddSearchCustomer({ setOpen }) {
                 textField={textField}
             /> */}
 
-        </div>
+        </AppProvider>
     );
 }
 
