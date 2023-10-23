@@ -4,7 +4,7 @@ import { HiMiniArrowSmallLeft } from 'react-icons/hi2'
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { AppProvider, Button, Checkbox, FormLayout, InlineError, LegacyCard, LegacyStack, RadioButton, Select, Text, TextField } from '@shopify/polaris';
+import { AppProvider, Button, Select, Text, TextField } from '@shopify/polaris';
 import { useCallback } from 'react';
 import { SearchMinor } from '@shopify/polaris-icons';
 import { Autocomplete, Icon } from '@shopify/polaris';
@@ -248,7 +248,7 @@ const Page = () => {
                                             Taxes (Included)
                                         </h6>
                                         <h6>
-                                           Rs 0.0
+                                            Rs 0.0
                                         </h6>
                                     </div>
                                     <div className='flex mt-2 justify-between'>
@@ -256,7 +256,7 @@ const Page = () => {
                                             Subtotal
                                         </h6>
                                         <h6>
-                                           Rs 0.0
+                                            Rs 0.0
                                         </h6>
                                     </div>
                                     <div className='flex justify-between'>
@@ -274,7 +274,7 @@ const Page = () => {
                                             Shipping
                                         </h6>
                                         <h6>
-                                           Rs 0.0
+                                            Rs 0.0
                                         </h6>
                                     </div>
                                     <div className='flex mt-3 justify-between'>
@@ -282,7 +282,7 @@ const Page = () => {
                                             Total
                                         </h6>
                                         <h6>
-                                           Rs 0.0
+                                            Rs 0.0
                                         </h6>
                                     </div>
                                 </div>

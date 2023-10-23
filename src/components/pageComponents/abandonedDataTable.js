@@ -11,14 +11,33 @@ import {
   Badge,
   AppProvider,
   LegacyCard,
+  BlockStack,
+  InlineStack,
 } from '@shopify/polaris';
 import content from '@/components/assests/png/content.png'
 import en from "@shopify/polaris/locales/en.json";
 import Image from 'next/image';
-import { useState, useCallback, forwardRef } from 'react';
+import { useState, useCallback, forwardRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation'
 
 const AbandonedCheckouts = () => {
+  const [showTable, setShowTable] = useState(false);
+
+  useEffect(() => {
+    function handleResize() {
+
+      if (window.innerWidth <= 500) {
+        setShowTable(true);
+      } else {
+        setShowTable(false);
+      }
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const router = useRouter()
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const [itemStrings, setItemStrings] = useState([
@@ -241,23 +260,19 @@ const AbandonedCheckouts = () => {
   const orders = [
     {
       id: '1020',
-      titleImage: content,
-      product: 'p1',
-      sku: 'No SKU',
-      unavailable: '0',
-      available: '10',
-      commited: '0',
-      onHand: '10',
+      checkout: '#3391020',
+      date: '2/2/2000',
+      placedBy: 'No placedBy',
+      recoveryStatus: '0',
+      total: '$30',
     },
     {
       id: '1030',
-      titleImage: content,
-      product: 'p2',
-      sku: 'No SKU',
-      unavailable: '0',
-      available: '10',
-      commited: '0',
-      onHand: '10',
+      checkout: '#3391020',
+      date: '3/3/30000',
+      placedBy: 'No DS',
+      recoveryStatus: '0',
+      total: '$10',
     },
 
   ];
@@ -266,8 +281,8 @@ const AbandonedCheckouts = () => {
     plural: 'orders',
   };
 
-  const { selectedResources, allResourcesSelected, handleSelectionChange } =
-    useIndexResourceState(orders);
+  const { selectedResources, allResourcesSelected, handleSelectionChange } = useIndexResourceState(orders);
+
 
   const rowMarkup = orders.map(
     (items, index) => (
@@ -276,18 +291,50 @@ const AbandonedCheckouts = () => {
         key={items.id}
         selected={selectedResources.includes(items.id)}
         position={index}
+        onClick={() => router.push("/order/abandoned-checkouts/detail")}
       >
         <IndexTable.Cell>
           <Text variant="bodyMd" fontWeight="bold" as="span">
-            {items.product}
+            {items.checkout}
           </Text>
         </IndexTable.Cell>
-        <IndexTable.Cell>{items.sku}</IndexTable.Cell>
-        <IndexTable.Cell>{items.unavailable}</IndexTable.Cell>
-        <IndexTable.Cell>{items.commited}</IndexTable.Cell>
-        <IndexTable.Cell>{items.available}</IndexTable.Cell>
+        <IndexTable.Cell>{items.date}</IndexTable.Cell>
+        <IndexTable.Cell>{items.placedBy}</IndexTable.Cell>
+        <IndexTable.Cell>{items.recoveryStatus}</IndexTable.Cell>
+        <IndexTable.Cell>{items.total}</IndexTable.Cell>
       </IndexTable.Row>
     )
+  );
+  const ResponsiveRow = orders.map(
+    (items, index,) => (
+      <IndexTable.Row
+        id={items.id}
+        onClick={() => router.push("/abandoned-checkouts/detail")}
+        key={items.id}
+        selected={selectedResources.includes(items.id)}
+        position={index}
+      >
+        <div style={{ padding: '12px 16px', width: '100%' }}>
+          <BlockStack gap="100">
+            <Text as="span" variant="bodySm" tone="subdued">
+              {items.product}
+            </Text>
+
+            <InlineStack align="space-between">
+              <Text as="span" variant="bodyMd" fontWeight="semibold">
+                {items.sku}
+              </Text>
+            </InlineStack>
+            <InlineStack align="start" gap="100">
+              {items.unavailable}  •  {items.commited}
+            </InlineStack>
+            <InlineStack align="start" gap="100">
+              {items.available}
+            </InlineStack>
+          </BlockStack>
+        </div>
+      </IndexTable.Row>
+    ),
   );
   const promotedBulkActions = [
     {
@@ -328,24 +375,26 @@ const AbandonedCheckouts = () => {
             onClearAll={handleFiltersClearAll}
             mode={mode}
             setMode={setMode}
+            loading={false}
           />
           <IndexTable
-            selectable
+            // selectable
             resourceName={resourceName}
             itemCount={orders.length}
             selectedItemsCount={allResourcesSelected ? 'All' : selectedResources.length}
             onSelectionChange={handleSelectionChange}
-            hasMoreItems
+            // hasMoreItems
+            condensed={showTable}
             promotedBulkActions={promotedBulkActions}
             headings={[
-              { title: 'Checkouts' },
+              { title: 'Checkout' },
               { title: 'Date' },
               { title: 'Placed By' },
               { title: 'Recovery Status' },
               { title: 'Total' },
             ]}
           >
-            {rowMarkup}
+            {showTable ? ResponsiveRow : rowMarkup}
           </IndexTable>
         </LegacyCard>
       </AppProvider>

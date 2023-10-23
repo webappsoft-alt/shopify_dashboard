@@ -11,18 +11,39 @@ import {
   Badge,
   AppProvider,
   LegacyCard,
+  BlockStack,
+  InlineStack,
 } from '@shopify/polaris';
 import content from '@/components/assests/png/content.png'
 import en from "@shopify/polaris/locales/en.json";
 import Image from 'next/image';
-import { useState, useCallback, forwardRef } from 'react';
+import { useState, useCallback, forwardRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const CollectionDataTable = () => {
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const [itemStrings, setItemStrings] = useState([
     'All',
   ]);
+  const [showTable, setShowTable] = useState(false);
+
+  useEffect(() => {
+    function handleResize() {
+
+      if (window.innerWidth <= 500) {
+        setShowTable(true);
+      } else {
+        setShowTable(false);
+      }
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const [sortedRows, setSortedRows] = useState(null);
+  const router = useRouter()
   const deleteView = (index) => {
     const newItemStrings = [...itemStrings];
     newItemStrings.splice(index, 1);
@@ -267,6 +288,7 @@ const CollectionDataTable = () => {
         id={id}
         key={id}
         selected={selectedResources.includes(id)}
+        onClick={() => router.push('/products/create-collection')}
         position={index}
       >
         <IndexTable.Cell className='w-10'  >
@@ -284,35 +306,49 @@ const CollectionDataTable = () => {
       </IndexTable.Row>
     )
   );
-  // const promotedBulkActions = [
-  //   {
-  //     content: 'Edit',
-  //     onAction: () => console.log('Todo: implement create shipping labels'),
-  //   },
-  //   {
-  //     content: 'Update',
-  //     onAction: () => console.log('Todo: implement mark as fulfilled'),
-  //   },
-  //   {
-  //     content: 'Create Purchase Order',
-  //     onAction: () => console.log('Todo: implement mark as fulfilled'),
-  //   },
 
-  // ];
-  // const bulkActions = [
-  //   {
-  //     content: 'Add tags',
-  //     onAction: () => console.log('Todo: implement bulk add tags'),
-  //   },
-  //   {
-  //     content: 'Remove tags',
-  //     onAction: () => console.log('Todo: implement bulk remove tags'),
-  //   },
-  //   {
-  //     content: 'Delete customers',
-  //     onAction: () => console.log('Todo: implement bulk delete'),
-  //   },
-  // ];
+  const ResponsiveRow = orders.map(
+    ({ id, title, titleImage, product, productCondition }, index,) => (
+      <IndexTable.Row
+        id={id}
+        onClick={() => router.push("/products/create-collection")}
+        key={id}
+        selected={selectedResources.includes(id)}
+        position={index}
+      >
+        <div style={{ padding: '12px 16px', width: '100%' }}>
+          <BlockStack gap="100">
+            <InlineStack align="space-between">
+              <Image src={titleImage} alt='' className='w-8 object-contain' />
+              <Text as="span" variant="bodyMd" fontWeight="semibold">
+                {title}
+              </Text>
+            </InlineStack>
+            <InlineStack align="space-between">
+              <Text as="span" variant="bodyMd" fontWeight="semibold">
+                {product}  •   {productCondition}
+              </Text>
+            </InlineStack>
+          </BlockStack>
+        </div>
+      </IndexTable.Row>
+    ),
+  );
+  const promotedBulkActions = [
+    {
+      content: 'Edit',
+      onAction: () => router.push('/products/add-product'),
+    },
+
+
+  ];
+  const bulkActions = [
+  
+    {
+      content: 'Delete collection',
+      onAction: () => console.log('Todo: implement bulk delete'),
+    },
+  ];
 
   return (
     <div className=''>
@@ -349,9 +385,10 @@ const CollectionDataTable = () => {
             itemCount={orders.length}
             selectedItemsCount={allResourcesSelected ? 'All' : selectedResources.length}
             onSelectionChange={handleSelectionChange}
-            // hasMoreItems
-            // bulkActions={bulkActions}
-            // promotedBulkActions={promotedBulkActions}
+            condensed={showTable}
+            hasMoreItems
+            bulkActions={bulkActions}
+            promotedBulkActions={promotedBulkActions}
             headings={[
               { title: '' },
               { title: 'Title' },
@@ -359,7 +396,8 @@ const CollectionDataTable = () => {
               { title: 'Product conditions' },
             ]}
           >
-            {rowMarkup}
+            {showTable ? ResponsiveRow : rowMarkup}
+
           </IndexTable>
         </LegacyCard>
       </AppProvider>

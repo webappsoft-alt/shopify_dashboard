@@ -31,6 +31,7 @@ const Page = () => {
                             <h6 className=" font-semibold text-base">Your orders will show here</h6>
                         </div>
                     </div> */}
+                       
                     </div>
                 </AppProvider>
             </div>

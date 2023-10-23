@@ -11,11 +11,13 @@ import {
   Badge,
   AppProvider,
   LegacyCard,
+  BlockStack,
+  InlineStack,
 } from '@shopify/polaris';
 import content from '@/components/assests/png/content.png'
 import en from "@shopify/polaris/locales/en.json";
 import Image from 'next/image';
-import { useState, useCallback, forwardRef } from 'react';
+import { useState, useCallback, forwardRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 const IndexTableWithViewsSearchFilterSorting = () => {
@@ -31,7 +33,23 @@ const IndexTableWithViewsSearchFilterSorting = () => {
     setItemStrings(newItemStrings);
     setSelected(0);
   };
+  const [showTable, setShowTable] = useState(false);
 
+  useEffect(() => {
+    function handleResize() {
+
+      if (window.innerWidth <= 500) {
+        setShowTable(true);
+      } else {
+        setShowTable(false);
+      }
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const duplicateView = async (name) => {
     setItemStrings([...itemStrings, name]);
     setSelected(itemStrings.length);
@@ -293,19 +311,58 @@ const IndexTableWithViewsSearchFilterSorting = () => {
       </IndexTable.Row>
     )
   );
+  const ResponsiveRow = orders.map(
+    (items, index,) => (
+      <IndexTable.Row
+        id={items.id}
+        key={items.id}
+        selected={selectedResources.includes(items.id)}
+        position={index}
+      >
+        <div style={{ padding: '12px 16px', width: '100%' }}>
+          <BlockStack gap="100">
+            <InlineStack align="space-between">
+              <Text as="span" variant="bodyMd" fontWeight="semibold">
+                {items.titleImage}
+              </Text>
+              <Text as="span" variant="bodyMd">
+                {items.product}
+              </Text>
+            </InlineStack>
+            <InlineStack align="space-between">
+              <Text as="span" variant="bodyMd" fontWeight="semibold">
+                {items.sku}
+              </Text>
+              <Text as="span" variant="bodyMd">
+                {items.unavailable}
+              </Text>
+            </InlineStack>
+            <InlineStack align="start" gap="100">
+              <Text as="span" variant="bodyMd">
+                {items.available}
+              </Text>
+              <Text as="span" variant="bodyMd">
+                {items.onHand}
+              </Text>
+            </InlineStack>
+          </BlockStack>
+        </div>
+      </IndexTable.Row>
+    ),
+  );
   const promotedBulkActions = [
     {
       content: 'Edit',
-      onAction: () => console.log('Todo: implement create shipping labels'),
+      onAction: () => router.push('/products/add-product'),
     },
     {
-      content: 'Update',
+      content: 'Update Quantities',
       onAction: () => console.log('Todo: implement mark as fulfilled'),
     },
     {
       content: 'Create Purchase Order',
       onAction: () => router.push('/order/create-purchase-order'),
-    
+
     },
 
   ];
@@ -346,6 +403,7 @@ const IndexTableWithViewsSearchFilterSorting = () => {
             selectedItemsCount={allResourcesSelected ? 'All' : selectedResources.length}
             onSelectionChange={handleSelectionChange}
             hasMoreItems
+            condensed={showTable}
             promotedBulkActions={promotedBulkActions}
             headings={[
               { title: '' },
@@ -357,7 +415,7 @@ const IndexTableWithViewsSearchFilterSorting = () => {
               { title: 'On hand' },
             ]}
           >
-            {rowMarkup}
+            {showTable ? ResponsiveRow : rowMarkup}
           </IndexTable>
         </LegacyCard>
       </AppProvider>

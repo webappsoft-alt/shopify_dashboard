@@ -9,11 +9,13 @@ import {
   Badge,
   AppProvider,
   LegacyCard,
+  BlockStack,
+  InlineStack,
 } from '@shopify/polaris';
 import content from '@/components/assests/png/content.png'
 import en from "@shopify/polaris/locales/en.json";
 import Image from 'next/image';
-import { useState, useCallback, forwardRef } from 'react';
+import { useState, useCallback, forwardRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 const CustomerDataTable = () => {
@@ -22,6 +24,23 @@ const CustomerDataTable = () => {
   const [itemStrings, setItemStrings] = useState([
     'All',
   ]);
+  const [showTable, setShowTable] = useState(false);
+
+  useEffect(() => {
+    function handleResize() {
+
+      if (window.innerWidth <= 500) {
+        setShowTable(true);
+      } else {
+        setShowTable(false);
+      }
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const [sortedRows, setSortedRows] = useState(null);
   const deleteView = (index) => {
     const newItemStrings = [...itemStrings];
@@ -93,7 +112,7 @@ const CustomerDataTable = () => {
     return true;
   };
 
- 
+
   const onHandleSave = async () => {
     await sleep(1);
     return true;
@@ -256,19 +275,52 @@ const CustomerDataTable = () => {
       </IndexTable.Row>
     )
   );
-
+  const ResponsiveRow = orders.map(
+    (items, index,) => (
+      <IndexTable.Row
+        id={items.id}
+        key={items.id}
+        selected={selectedResources.includes(items.id)}
+        position={index}
+      >
+        <div style={{ padding: '12px 16px', width: '100%' }}>
+          <BlockStack gap="100">
+            <InlineStack align="space-between">
+              <Image src={items.titleImage} alt='' className='w-10 object-contain' />
+              <Text as="span" variant="bodyMd">
+                {items.name}
+              </Text>
+            </InlineStack>
+            <InlineStack align="space-between">
+              <Text as="span" variant="bodyMd" fontWeight="semibold">
+                {items.email}
+              </Text>
+              <Text as="span" variant="bodyMd">
+                {items.phone}
+              </Text>
+            </InlineStack>
+            <InlineStack align="start" gap="100">
+              <Text as="span" variant="bodyMd">
+                {items.address}
+              </Text>
+            </InlineStack>
+          </BlockStack>
+        </div>
+      </IndexTable.Row>
+    ),
+  );
   return (
     <div className=''>
       <AppProvider i18n={en} >
         <LegacyCard   >
-         
+
           <IndexTable
             selectable={false}
             resourceName={resourceName}
             itemCount={orders.length}
             selectedItemsCount={allResourcesSelected ? 'All' : selectedResources.length}
             onSelectionChange={handleSelectionChange}
-          
+            condensed={showTable}
             headings={[
               { title: '' },
               { title: 'Name' },
@@ -277,7 +329,7 @@ const CustomerDataTable = () => {
               { title: 'Address' },
             ]}
           >
-            {rowMarkup}
+            {showTable ? ResponsiveRow : rowMarkup}
           </IndexTable>
         </LegacyCard>
       </AppProvider>

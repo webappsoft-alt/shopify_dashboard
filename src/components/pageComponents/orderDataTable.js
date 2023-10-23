@@ -11,9 +11,12 @@ import {
   RangeSlider,
   Badge,
   AppProvider,
+  BlockStack,
+  InlineStack,
 } from '@shopify/polaris';
 import en from "@shopify/polaris/locales/en.json";
-import { useState, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import { useState, useCallback, useEffect } from 'react';
 
 const OrderDataTable = () => {
   const sleep = (ms) =>
@@ -25,6 +28,23 @@ const OrderDataTable = () => {
     'Open',
     'Closed',
   ]);
+  const [showTable, setShowTable] = useState(false);
+  const router = useRouter()
+  useEffect(() => {
+    function handleResize() {
+
+      if (window.innerWidth <= 500) {
+        setShowTable(true);
+      } else {
+        setShowTable(false);
+      }
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const deleteView = (index) => {
     const newItemStrings = [...itemStrings];
     newItemStrings.splice(index, 1);
@@ -296,7 +316,22 @@ const OrderDataTable = () => {
 
   const { selectedResources, allResourcesSelected, handleSelectionChange } =
     useIndexResourceState(orders);
-
+  const promotedBulkActions = [
+    {
+      content: 'Edit',
+      onAction: () => router.push('/order/create-order'),
+    },
+    {
+      content: 'Remove tags',
+      onAction: () => console.log('Todo: implement mark as fulfilled'),
+    },
+  ];
+  const bulkActions = [
+    {
+      content: 'Delete orders',
+      onAction: () => console.log('Todo: implement bulk add tags'),
+    },
+  ];
   const rowMarkup = orders.map(
     (items, index,) => (
       <IndexTable.Row
@@ -304,6 +339,7 @@ const OrderDataTable = () => {
         key={items.id}
         selected={selectedResources.includes(items.id)}
         position={index}
+        onClick={() => router.push('/order/order-detail')}
       >
         <IndexTable.Cell>
           <Text variant="bodyMd" fontWeight="bold" as="span">
@@ -316,12 +352,52 @@ const OrderDataTable = () => {
         <IndexTable.Cell>{items.total}</IndexTable.Cell>
         <IndexTable.Cell>{items.paymentStatus}</IndexTable.Cell>
         <IndexTable.Cell>{items.fulfillmentStatus}</IndexTable.Cell>
+        <IndexTable.Cell>{items.deliveryStatus}</IndexTable.Cell>
+        <IndexTable.Cell>{items.deliveryMethod}</IndexTable.Cell>
       </IndexTable.Row>
     ),
   );
 
+  const ResponsiveRow = orders.map(
+    (items, index,) => (
+      <IndexTable.Row
+        id={items.id}
+        key={items.id}
+        selected={selectedResources.includes(items.id)}
+        position={index}
+      >
+        <div style={{ padding: '12px 16px', width: '100%' }}>
+          <BlockStack gap="100">
+            <Text as="span" variant="bodySm" tone="subdued">
+              {items.order} • {items.date}
+            </Text>
+
+            <InlineStack align="space-between">
+              <Text as="span" variant="bodyMd" fontWeight="semibold">
+                {items.customer}
+              </Text>
+              <Text as="span" variant="bodyMd" fontWeight="semibold">
+                {items.channel}
+              </Text>
+              <Text as="span" variant="bodyMd">
+                {items.total}
+              </Text>
+            </InlineStack>
+            <InlineStack align="start" gap="100">
+              {items.paymentStatus}
+              {items.fulfillmentStatus}
+            </InlineStack>
+            <InlineStack align="start" gap="100">
+              {items.deliveryStatus}
+              {items.deliveryMethod}
+            </InlineStack>
+          </BlockStack>
+        </div>
+      </IndexTable.Row>
+    ),
+  );
   return (
-    <AppProvider  i18n={en}>
+    <AppProvider i18n={en}>
       <LegacyCard>
         <IndexFilters
           sortOptions={sortOptions}
@@ -355,6 +431,9 @@ const OrderDataTable = () => {
           selectedItemsCount={
             allResourcesSelected ? 'All' : selectedResources.length
           }
+          promotedBulkActions={promotedBulkActions}
+          bulkActions={bulkActions}
+          condensed={showTable}
           onSelectionChange={handleSelectionChange}
           headings={[
             { title: 'Order' },
@@ -368,7 +447,7 @@ const OrderDataTable = () => {
             { title: 'Delivery Method' },
           ]}
         >
-          {rowMarkup}
+          {showTable ? ResponsiveRow : rowMarkup}
         </IndexTable>
       </LegacyCard>
     </AppProvider>

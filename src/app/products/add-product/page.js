@@ -16,7 +16,7 @@ const Page = () => {
         <main className="container px-4">
             <div className='mainPage'>
                 <div className="px-3 py-4">
-                    <h4 className="inter_semibold text-xl flex gap-2 items-center"> <span onClick={() => router.push('/home')}><HiMiniArrowSmallLeft className='font-bold' /></span>
+                    <h4 className="inter_semibold text-xl flex gap-2 items-center"> <span className='cursor-pointer' onClick={() => router.back()}><HiMiniArrowSmallLeft className='font-bold' /></span>
                         Add Product</h4>
                 </div>
                 <div className='AddProd mb-10 relative z-50'>

@@ -4,9 +4,9 @@ import { HiMiniArrowSmallLeft } from 'react-icons/hi2'
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { AppProvider, Button, Checkbox, Form, FormLayout, Frame, LegacyStack, Modal, Select, Text, TextField } from '@shopify/polaris';
+import { ActionList, AppProvider, Badge, Button, ButtonGroup, Checkbox, Form, FormLayout, Frame, LegacyStack, Modal, Popover, Select, Text, TextField } from '@shopify/polaris';
 import { useCallback } from 'react';
-import { SearchMinor } from '@shopify/polaris-icons';
+import { ClipboardMinor } from '@shopify/polaris-icons';
 import { Icon } from '@shopify/polaris';
 import SearchableProducts from '@/components/pageComponents/searchableProducts';
 import { EditMajor } from '@shopify/polaris-icons';
@@ -14,7 +14,16 @@ import en from "@shopify/polaris/locales/en.json";
 import { CircleInformationMajor } from '@shopify/polaris-icons';
 import AddSearchCustomer from '@/components/pageComponents/addSearchCustomer';
 import { ArrowLeftMinor } from '@shopify/polaris-icons';
-const CreateOrder = () => {
+import content from '@/components/assests/png/content.png'
+import {
+    UnfulfilledMajor
+} from '@shopify/polaris-icons';
+import {
+    MarkPaidMinor
+} from '@shopify/polaris-icons';
+import Image from 'next/image';
+
+const OrderDetail = () => {
     const router = useRouter()
     const [searchValue, setSearchValue] = useState("")
     const [active, setActive] = useState(false);
@@ -68,7 +77,7 @@ const CreateOrder = () => {
         if (searchValue !== "") {
             toggleModal()
         }
-        else{
+        else {
             setSearchValue("")
         }
     }, [searchValue])
@@ -85,15 +94,53 @@ const CreateOrder = () => {
             }
         }
     }, [selectedProduct])
+    const [popoverActive, setPopoverActive] = useState(true);
 
+    const togglePopoverActive = useCallback(
+        () => setPopoverActive((popoverActive) => !popoverActive),
+        [],
+    );
+
+    const activator = (
+        <Button onClick={togglePopoverActive} disclosure>
+            More actions
+        </Button>
+    );
     return (
-        <main className="container px-4 relative">
-            <div className='mainPage'>
-                <div className="px-3 py-4">
-                    <h4 className="inter_semibold text-xl flex gap-2 items-center"> <div className='cursor-pointer' onClick={() => router.back()}><HiMiniArrowSmallLeft className='font-bold' /></div>
-                        Create Order</h4>
-                </div>
+        <main className="container  px-4 relative">
+            <div className='mainPage more_action'>
                 <AppProvider i18n={en}>
+                    <div className="px-3 py-4">
+                        <div className='flex justify-between items-center'>
+                            <div className='flex gap-1'>
+                                <div className='cursor-pointer' onClick={() => router.back()}><HiMiniArrowSmallLeft className='font-bold text-2xl' /></div>
+                                <div>
+                                    <h4 className="inter_semibold text-xl flex gap-2 items-center">
+                                        gch-1002 <Badge progress='complete' >paid</Badge>  <Badge progress='incomplete' tone='attention' >Unfulfilled</Badge> </h4>
+                                    <div style={{ color: "#303030" }}>
+                                        September 18, 2023 at 7:30 pm
+                                    </div>
+                                </div>
+                            </div>
+                            <div className=''>
+                                <div className='flex gap-2 relative '>
+                                    <Button variant='tertiary' >Refund</Button>
+                                    <Button variant='tertiary' onClick={()=>router.push('/order/create-order')} dataPrimaryLink >Edit</Button>
+                                    <Popover
+                                        active={popoverActive}
+                                        activator={activator}
+                                        autofocusTarget="first-node"
+                                        onClose={togglePopoverActive}>
+                                        <ActionList
+                                            actionRole="menuitem"
+                                            items={[{ content: 'Import' }, { content: 'Export' }]}
+                                        />
+                                    </Popover>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <Frame>
                         <Modal
                             open={active}
@@ -233,46 +280,96 @@ const CreateOrder = () => {
                                 </LegacyStack>
                             </Modal.Section>
                         </Modal>
-                        {/* </Frame> */}
                         <div className='AddProd mb-10'>
                             <div className='prodMain'>
                                 <div className=' w-full'>
-                                    <div className='innerCard mt-1 mb-3'>
-                                        <div className='flex justify-between items-center'>
-                                            <div className=''>
-                                                Products
-                                            </div>
+                                    <div className='innerCard mt-1 mb-3 w-full'>
+                                        <div className='flex justify-between'>
                                             <div>
-                                                <Button onClick={toggleModal2} variant="plain" tone="critical" >Add custom item</Button>
+                                                <Badge tone='attention'>
+                                                    <div className='flex items-center gap-1'>
+                                                        <Icon
+                                                            source={UnfulfilledMajor}
+                                                            tone="base"
+                                                        />
+                                                        Unfulfilled (1)
+                                                    </div>
+                                                </Badge>
                                             </div>
                                         </div>
-                                        <div className='flex gap-3 relative items-end w-full'>
-                                            <div className='w-full mt-2'>
-                                                <TextField
-                                                    value={searchValue}
-                                                    type={"search"}
-                                                    onChange={handleChangeSearch}
-                                                    autoComplete="off"
-                                                    placeholder='Search Products'
-                                                    prefix={<Icon source={SearchMinor} tone="base" />} />
+                                        <div className='px-3 py-3 flex flex-col gap-3 mt-3 mb-3 rounded-xl border'>
+                                            <div className='flex gap-2 items-center  justify-between'>
+                                                <div className='flex items-center gap-2'>
+                                                    <div>
+                                                        <Image src={content} alt='' className='object-contain w-9 h-11' />
+                                                    </div>
+                                                    <div className='maxDetailWidth'>
+                                                        <Link href={""}>MARIA.B COUTURE SAREE ICE BLUE  MC_049</Link>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    RS 14,500 x 1
+                                                </div>
+                                                <div>
+                                                    RS 14,500
+                                                </div>
                                             </div>
-
-                                            <div className='w-16 inline-block'>
-                                                <Button onClick={() => {
-                                                    setBrowse(true)
-                                                    toggleModal()
-                                                }} size="large" >Browse</Button>
-                                            </div>
-
+                                        </div>
+                                        <div className='flex justify-end'>
+                                            <Button variant='primary'>Fulfill item</Button>
                                         </div>
                                     </div>
                                     <div className='innerCard mt-1 mb-3 w-full'>
                                         <div className='flex justify-between'>
-                                            <h6>
-                                                Payment
-                                            </h6>
+                                            <div>
+                                                <Badge tone='attention'>
+                                                    <div className='flex items-center gap-1'>
+                                                        <Icon
+                                                            source={UnfulfilledMajor}
+                                                            tone="base"
+                                                        />
+                                                        Unfulfilled (1)
+                                                    </div>
+                                                </Badge>
+                                            </div>
                                         </div>
-                                        <div className='px-3 py-3 flex flex-col gap-3 mt-2 rounded-xl border'>
+                                        <div className='px-3 py-3 flex flex-col gap-3 mt-3 mb-3 rounded-xl border'>
+                                            <div className='flex gap-2 items-center  justify-between'>
+                                                <div className='flex items-center gap-2'>
+                                                    <div>
+                                                        <Image src={content} alt='' className='object-contain w-9 h-11' />
+                                                    </div>
+                                                    <div className='maxDetailWidth'>
+                                                        <Link href={""}>MARIA.B COUTURE SAREE ICE BLUE  MC_049</Link>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    RS 14,500 x 1
+                                                </div>
+                                                <div>
+                                                    RS 14,500
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className='flex justify-end'>
+                                            <Button variant='primary'>Fulfill item</Button>
+                                        </div>
+                                    </div>
+                                    <div className='innerCard mt-1 mb-3 w-full'>
+                                        <div className='flex justify-between'>
+                                            <div>
+                                                <Badge tone=' ' progress="" >
+                                                    <div className='flex items-center gap-1'>
+                                                        <Icon
+                                                            source={MarkPaidMinor}
+                                                            tone="base"
+                                                        />
+                                                       Paid
+                                                    </div>
+                                                </Badge>
+                                            </div>
+                                        </div>
+                                        <div className='px-3 py-2 flex flex-col gap-3 mt-2 '>
                                             <div className='flex justify-between'>
                                                 <h6>
                                                     Subtotal
@@ -282,37 +379,23 @@ const CreateOrder = () => {
                                                 </h6>
                                             </div>
                                             <div className='flex justify-between'>
-                                                <h6>
-                                                    Add discount
-                                                </h6>
-                                                <h6>
-                                                    Rs 0.00
-                                                </h6>
-                                            </div>
-                                            <div className='flex justify-between'>
-                                                <h6>
-                                                    Add shipping or delivery
-                                                </h6>
-                                                <h6>
-                                                    Rs 0.0
-                                                </h6>
-                                            </div>
-                                            <div className='flex justify-between'>
-                                                <h6 className='flex gap-1 items-center1'>
-                                                    Estimated tax <Link href={'/'}><Icon source={CircleInformationMajor} tone="base" /></Link>
-                                                </h6>
-                                                <h6>
-                                                    Rs 0.0
-                                                </h6>
-                                            </div>
-                                            <div className='flex mt-3 justify-between'>
-                                                <h6>
+                                                <h6 className='inter_semibold'>
                                                     Total
                                                 </h6>
                                                 <h6>
                                                     Rs 0.0
                                                 </h6>
                                             </div>
+
+                                            <div className='flex pt-2 mt-1 justify-between border-t'>
+                                                <div className=' ' >
+                                                    To be paid by customer
+                                                </div>
+                                                <h6>
+                                                    Rs 0.0
+                                                </h6>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -335,12 +418,63 @@ const CreateOrder = () => {
                                     </div>
                                 </div>
                                 <div className='innerCard mt-3 price'>
-                                    <AddSearchCustomer></AddSearchCustomer>
+                                    <div>
+                                        <div className='inter_semibold'>
+                                            Customer
+                                        </div>
+                                        <div className='mt-1'>
+                                            No order
+                                        </div>
+                                    </div>
+                                    <div className=''>
+                                        <div className='my-2 py-1 inter_semibold'>
+                                            Contact Information
+                                        </div>
+                                        <div className='mt-1'>
+                                            No email provided
+                                        </div>
+                                        <div className=''>
+                                            +92 30404004030
+                                        </div>
+                                        <div className=''>
+                                            No account
+                                        </div>
+                                    </div>
+                                    <div className=''>
+                                        <div className='my-2 py-1 inter_semibold'>
+                                            Shipping address
+                                        </div>
+                                        <div className='mt-1'>
+                                            No shipping address provided
+                                        </div>
+
+                                    </div>
+                                    <div className=''>
+                                        <div className='my-2 py-1 inter_semibold'>
+                                            Billing address
+                                        </div>
+                                        <div className='mt-1'>
+                                            No billing address provided
+                                        </div>
+
+                                    </div>
+                                    <div className=''>
+                                        <div className='my-2 py-1 inter_semibold'>
+                                            Marketing
+                                        </div>
+                                        <div className='mt-1'>
+                                            Email not subscribed
+                                        </div>
+                                        <div className='mt-1'>
+                                            SMS not subscribed
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </Frame>
-                    
+
                 </AppProvider>
 
             </div>
@@ -350,4 +484,4 @@ const CreateOrder = () => {
 
 
 
-export default CreateOrder;
+export default OrderDetail;
