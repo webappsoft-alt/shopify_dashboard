@@ -7,7 +7,7 @@ import {
     ChoiceList,
 } from '@shopify/polaris';
 import { useIndexResourceState, IndexTable } from '@shopify/polaris';
-import { LegacyCard, OptionList } from '@shopify/polaris';
+import { Card, OptionList } from '@shopify/polaris';
 import { SearchMinor, FilterMajor } from '@shopify/polaris-icons';
 
 const SearchableProducts = ({ searchValue, browse, selectedProduct, setSelectedProduct }) => {
@@ -80,7 +80,7 @@ const SearchableProducts = ({ searchValue, browse, selectedProduct, setSelectedP
                 </StopPropagation>
             </div>
             <div className=''>
-                <LegacyCard>
+                <Card>
                     <OptionList
                         onChange={setSelectedProduct}
                         options={[
@@ -92,7 +92,7 @@ const SearchableProducts = ({ searchValue, browse, selectedProduct, setSelectedP
                         ]}
                         selected={selectedProduct}
                     />
-                </LegacyCard>
+                </Card>
             </div>
         </div>
     );

@@ -10,9 +10,10 @@ import {
   RangeSlider,
   Badge,
   AppProvider,
-  LegacyCard,
+  Card,
   BlockStack,
   InlineStack,
+  Frame,
 } from '@shopify/polaris';
 import content from '@/components/assests/png/content.png'
 import en from "@shopify/polaris/locales/en.json";
@@ -282,7 +283,9 @@ const AbandonedCheckouts = () => {
   };
 
   const { selectedResources, allResourcesSelected, handleSelectionChange } = useIndexResourceState(orders);
-
+  const navigate = useCallback(() => {
+    router.push('/order/abandoned-checkouts/detail');
+  }, [router]);
 
   const rowMarkup = orders.map(
     (items, index) => (
@@ -291,7 +294,7 @@ const AbandonedCheckouts = () => {
         key={items.id}
         selected={selectedResources.includes(items.id)}
         position={index}
-        onClick={() => router.push("/order/abandoned-checkouts/detail")}
+        onClick={navigate}
       >
         <IndexTable.Cell>
           <Text variant="bodyMd" fontWeight="bold" as="span">
@@ -309,27 +312,29 @@ const AbandonedCheckouts = () => {
     (items, index,) => (
       <IndexTable.Row
         id={items.id}
-        onClick={() => router.push("/abandoned-checkouts/detail")}
         key={items.id}
         selected={selectedResources.includes(items.id)}
         position={index}
       >
-        <div style={{ padding: '12px 16px', width: '100%' }}>
+        <div style={{ padding: '12px 16px', width: '100%' }} onClick={navigate}>
           <BlockStack gap="100">
             <Text as="span" variant="bodySm" tone="subdued">
-              {items.product}
+              {items.checkout}
             </Text>
 
             <InlineStack align="space-between">
               <Text as="span" variant="bodyMd" fontWeight="semibold">
                 {items.sku}
               </Text>
+              <Text as="span" variant="bodyMd" fontWeight="semibold">
+                {items.total}
+              </Text>
             </InlineStack>
             <InlineStack align="start" gap="100">
-              {items.unavailable}  •  {items.commited}
+              {items.date}  •   {items.placedBy}
             </InlineStack>
             <InlineStack align="start" gap="100">
-              {items.available}
+              {items.recoveryStatus}
             </InlineStack>
           </BlockStack>
         </div>
@@ -350,53 +355,55 @@ const AbandonedCheckouts = () => {
   return (
     <div className=''>
       <AppProvider i18n={en} >
-        <LegacyCard   >
-          <IndexFilters
-            sortOptions={sortOptions}
-            sortSelected={sortSelected}
-            queryValue={queryValue}
-            queryPlaceholder="Searching in all"
-            onQueryChange={handleFiltersQueryChange}
-            onQueryClear={() => { }}
-            onSort={setSortSelected}
-            primaryAction={primaryAction}
-            cancelAction={{
-              onAction: onHandleCancel,
-              disabled: false,
-              loading: false,
-            }}
-            tabs={tabs}
-            selected={selected}
-            onSelect={setSelected}
-            canCreateNewView
-            onCreateNewView={onCreateNewView}
-            filters={filters}
-            appliedFilters={appliedFilters}
-            onClearAll={handleFiltersClearAll}
-            mode={mode}
-            setMode={setMode}
-            loading={false}
-          />
-          <IndexTable
-            // selectable
-            resourceName={resourceName}
-            itemCount={orders.length}
-            selectedItemsCount={allResourcesSelected ? 'All' : selectedResources.length}
-            onSelectionChange={handleSelectionChange}
-            // hasMoreItems
-            condensed={showTable}
-            promotedBulkActions={promotedBulkActions}
-            headings={[
-              { title: 'Checkout' },
-              { title: 'Date' },
-              { title: 'Placed By' },
-              { title: 'Recovery Status' },
-              { title: 'Total' },
-            ]}
-          >
-            {showTable ? ResponsiveRow : rowMarkup}
-          </IndexTable>
-        </LegacyCard>
+        <Frame>
+          <Card padding={0}>
+            <IndexFilters
+              sortOptions={sortOptions}
+              sortSelected={sortSelected}
+              queryValue={queryValue}
+              queryPlaceholder="Searching in all"
+              onQueryChange={handleFiltersQueryChange}
+              onQueryClear={() => { }}
+              onSort={setSortSelected}
+              primaryAction={primaryAction}
+              cancelAction={{
+                onAction: onHandleCancel,
+                disabled: false,
+                loading: false,
+              }}
+              tabs={tabs}
+              selected={selected}
+              onSelect={setSelected}
+              canCreateNewView
+              onCreateNewView={onCreateNewView}
+              filters={filters}
+              appliedFilters={appliedFilters}
+              onClearAll={handleFiltersClearAll}
+              mode={mode}
+              setMode={setMode}
+              loading={false}
+            />
+            <IndexTable
+              // selectable
+              resourceName={resourceName}
+              itemCount={orders.length}
+              selectedItemsCount={allResourcesSelected ? 'All' : selectedResources.length}
+              onSelectionChange={handleSelectionChange}
+              // hasMoreItems
+              condensed={showTable}
+              promotedBulkActions={promotedBulkActions}
+              headings={[
+                { title: 'Checkout' },
+                { title: 'Date' },
+                { title: 'Placed By' },
+                { title: 'Recovery Status' },
+                { title: 'Total' },
+              ]}
+            >
+              {showTable ? ResponsiveRow : rowMarkup}
+            </IndexTable>
+          </Card>
+        </Frame>
       </AppProvider>
     </div>
   );

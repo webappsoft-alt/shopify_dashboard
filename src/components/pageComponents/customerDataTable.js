@@ -8,9 +8,10 @@ import {
   RangeSlider,
   Badge,
   AppProvider,
-  LegacyCard,
+  Card,
   BlockStack,
   InlineStack,
+  Frame,
 } from '@shopify/polaris';
 import content from '@/components/assests/png/content.png'
 import en from "@shopify/polaris/locales/en.json";
@@ -312,26 +313,27 @@ const CustomerDataTable = () => {
   return (
     <div className=''>
       <AppProvider i18n={en} >
-        <LegacyCard   >
-
-          <IndexTable
-            selectable={false}
-            resourceName={resourceName}
-            itemCount={orders.length}
-            selectedItemsCount={allResourcesSelected ? 'All' : selectedResources.length}
-            onSelectionChange={handleSelectionChange}
-            condensed={showTable}
-            headings={[
-              { title: '' },
-              { title: 'Name' },
-              { title: 'Email' },
-              { title: 'Phone' },
-              { title: 'Address' },
-            ]}
-          >
-            {showTable ? ResponsiveRow : rowMarkup}
-          </IndexTable>
-        </LegacyCard>
+        <Frame>
+          <Card padding={0}>
+            <IndexTable
+              selectable={false}
+              resourceName={resourceName}
+              itemCount={orders.length}
+              selectedItemsCount={allResourcesSelected ? 'All' : selectedResources.length}
+              onSelectionChange={handleSelectionChange}
+              condensed={showTable}
+              headings={[
+                { title: '' },
+                { title: 'Name' },
+                { title: 'Email' },
+                { title: 'Phone' },
+                { title: 'Address' },
+              ]}
+            >
+              {showTable ? ResponsiveRow : rowMarkup}
+            </IndexTable>
+          </Card>
+        </Frame>
       </AppProvider>
     </div>
   );

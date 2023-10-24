@@ -613,7 +613,12 @@ width: 99% !important;
   max-width: 100%;
   width: 1.25rem
 }
-
+/* [type=button], [type=reset], [type=submit], button {
+  background-color: initial ;
+} */
+.Polaris-Button--critical, .Polaris-Button--primary, .Polaris-Button--tertiary{
+  background:var(--pc-button-color);
+}
 .more_action .Polaris-Popover__PopoverOverlay--open{
   top: 60px !important;
   z-index: 100;

@@ -87,7 +87,7 @@ const CreateOrder = () => {
     }, [selectedProduct])
 
     return (
-        <main className="container px-4 relative">
+        <main className="container px-2 relative">
             <div className='mainPage'>
                 <div className="px-3 py-4">
                     <h4 className="inter_semibold text-xl flex gap-2 items-center"> <div className='cursor-pointer' onClick={() => router.back()}><HiMiniArrowSmallLeft className='font-bold' /></div>

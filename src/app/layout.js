@@ -1,7 +1,5 @@
-import ShopifySidebar from '@/components/sidebar/sidebar'
 import './globals.css'
 import { Inter } from 'next/font/google'
-import NavHeader from '@/components/navHeader/navHeader'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/components/style/main.css'
 import '@/components/style/font_Sizes.css'
@@ -18,13 +16,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <NavHeader />
-        <div className='flex'>
-          <ShopifySidebar />
-          <main className='w-full ' style={{backgroundColor:"#f1f1f1"}}>
-            {children}
-          </main>
-        </div> */}
         <IndexLayout>
           {children}
         </IndexLayout>

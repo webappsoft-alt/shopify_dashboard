@@ -15,3 +15,9 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+.supens_Class .spinner-border,
+.supens_Class .spinner-grow {
+  width: 4.3rem !important;
+  height: 4.3rem !important;
+  border-width: 0.1em !important;
+}

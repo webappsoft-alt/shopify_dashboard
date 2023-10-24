@@ -13,7 +13,7 @@ const ShopifySidebar2 = () => {
                         <Navigation.Section
                             items={[
                                 {
-                                    url: '/home',
+                                    url: '/',
                                     excludePaths: ['#'],
                                     label: 'Home',
                                     icon: HomeMinor,

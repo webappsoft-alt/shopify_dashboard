@@ -13,7 +13,7 @@ const Page = () => {
     const [description, setDescription] = useState('');
    
     return (
-        <main className="container px-4">
+        <main className="container px-2">
             <div className='mainPage'>
                 <div className="px-3 py-4">
                     <h4 className="inter_semibold text-xl flex gap-2 items-center"> <span className='cursor-pointer' onClick={() => router.back()}><HiMiniArrowSmallLeft className='font-bold' /></span>

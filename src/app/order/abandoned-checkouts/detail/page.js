@@ -90,7 +90,7 @@ const AbandonedStatus = () => {
     }, [selectedProduct])
 
     return (
-        <main className="container px-4 relative">
+        <main className="container px-2 relative">
             <div className='mainPage'>
                 <div className="px-3 py-4">
                     <div className='flex gap-1'>
@@ -132,7 +132,6 @@ const AbandonedStatus = () => {
                             </Modal.Section>
                         </Modal>
                         <Modal
-                            // activator={active}
                             open={active3}
                             onClose={toggleModal3}
                             title="Select products"
@@ -244,41 +243,11 @@ const AbandonedStatus = () => {
                                 </LegacyStack>
                             </Modal.Section>
                         </Modal>
-                        {/* </Frame> */}
                         <div className='AddProd mb-10'>
                             <div className='prodMain'>
                                 <div className=' w-full'>
-                                    {/* <div className='innerCard mt-1 mb-3'>
-                                        <div className='flex justify-between items-center'>
-                                            <div className=''>
-                                                Products
-                                            </div>
-                                            <div>
-                                                <Button onClick={toggleModal2} variant="plain" tone="critical" >Add custom item</Button>
-                                            </div>
-                                        </div>
-                                        <div className='flex gap-3 relative items-end w-full'>
-                                            <div className='w-full mt-2'>
-                                                <TextField
-                                                    value={searchValue}
-                                                    type={"search"}
-                                                    onChange={handleChangeSearch}
-                                                    autoComplete="off"
-                                                    placeholder='Search Products'
-                                                    prefix={<Icon source={SearchMinor} tone="base" />} />
-                                            </div>
-
-                                            <div className='w-16 inline-block'>
-                                                <Button onClick={() => {
-                                                    setBrowse(true)
-                                                    toggleModal()
-                                                }} size="large" >Browse</Button>
-                                            </div>
-
-                                        </div>
-                                    </div> */}
                                     <div className='innerCard mt-1 mb-3 w-full'>
-                                        <div className='flex justify-between'>
+                                        <div className='flex justify-between max-md:gap-3 max-md:flex-col'>
                                             <div>
                                                 <h6 className='inter_semibold'>
                                                     Checkout details
@@ -287,7 +256,7 @@ const AbandonedStatus = () => {
                                                     Form Online Store
                                                 </h6>
                                             </div>
-                                            <div>
+                                            <div className='ms-auto'>
                                                 <Button>
                                                     <div className='flex items-center gap-1'>
                                                         <Icon

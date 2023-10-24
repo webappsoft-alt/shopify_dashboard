@@ -2,32 +2,20 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from "next/link";
-import { AppProvider, Button } from '@shopify/polaris';
+import { AppProvider, Button, Frame } from '@shopify/polaris';
 import DraftTable from '@/components/pageComponents/draftDataTable';
-
+import en from "@shopify/polaris/locales/en.json";
 const Page = () => {
     return (
         <div className="2xl:container grid mx-auto">
-            <AppProvider>
-                <div className="container grid mx-auto ">
-                    <div className="mt-3 px-3">
-                        <h5 className="font-bold text-lg roboto_medium mb-3">Draft Orders</h5>
-                        <DraftTable></DraftTable>
-                        {/* <div className="bg-white mt-4 customer_height rounded-xl shadow1 p-4" >
-                            <div className="h-full w-full flex-col flex justify-center items-center">
-                                <Image src='/order.svg' width={230} height={230} alt='' />
-                                <h6 className=" font-semibold mt-2 text-lg">Manually create orders and invoices</h6>
-                                <div className="w-2/4 text-center px-4" style={{ color: "#787878" }} >
-                                    Use draft orders to take orders over the phone, email invoices to customers, and collect payments.
-                                </div>
-                                <div className="flex gap-3 mt-3">
-                                    <Button variant='primary' >  Create draft order</Button>
-                                   
-                                </div>
-                            </div>
+            <AppProvider i18n={en}>
+                <div className="min-[1200px]:container min-[1200px]:grid min-[1200px]:mx-auto">
+                    <Frame>
+                        <div className="mt-3 px-2">
+                            <h5 className="font-bold text-lg roboto_medium mb-3">Draft Orders</h5>
+                            <DraftTable />
                         </div>
-                        <div className="mt-3 text-center pt-3">Learn more about <Link href={'/'}>orders</Link></div> */}
-                    </div>
+                    </Frame>
                 </div>
             </AppProvider>
         </div>

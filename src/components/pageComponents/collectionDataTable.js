@@ -10,9 +10,10 @@ import {
   RangeSlider,
   Badge,
   AppProvider,
-  LegacyCard,
+  Card,
   BlockStack,
   InlineStack,
+  Frame,
 } from '@shopify/polaris';
 import content from '@/components/assests/png/content.png'
 import en from "@shopify/polaris/locales/en.json";
@@ -281,14 +282,16 @@ const CollectionDataTable = () => {
 
   const { selectedResources, allResourcesSelected, handleSelectionChange } =
     useIndexResourceState(orders);
-
+  const navigate = useCallback(() => {
+    router.push('/products/create-collection');
+  }, [router]);
   const rowMarkup = orders.map(
     ({ id, title, titleImage, product, productCondition }, index) => (
       <IndexTable.Row
         id={id}
         key={id}
         selected={selectedResources.includes(id)}
-        onClick={() => router.push('/products/create-collection')}
+        onClick={navigate}
         position={index}
       >
         <IndexTable.Cell className='w-10'  >
@@ -311,12 +314,11 @@ const CollectionDataTable = () => {
     ({ id, title, titleImage, product, productCondition }, index,) => (
       <IndexTable.Row
         id={id}
-        onClick={() => router.push("/products/create-collection")}
         key={id}
         selected={selectedResources.includes(id)}
         position={index}
       >
-        <div style={{ padding: '12px 16px', width: '100%' }}>
+        <div style={{ padding: '12px 16px', width: '100%' }} onClick={navigate}>
           <BlockStack gap="100">
             <InlineStack align="space-between">
               <Image src={titleImage} alt='' className='w-8 object-contain' />
@@ -343,7 +345,7 @@ const CollectionDataTable = () => {
 
   ];
   const bulkActions = [
-  
+
     {
       content: 'Delete collection',
       onAction: () => console.log('Todo: implement bulk delete'),
@@ -353,53 +355,55 @@ const CollectionDataTable = () => {
   return (
     <div className=''>
       <AppProvider i18n={en} >
-        <LegacyCard   >
-          <IndexFilters
-            sortOptions={sortOptions}
-            sortSelected={sortSelected}
-            queryValue={queryValue}
-            queryPlaceholder="Searching in all"
-            onQueryChange={handleFiltersQueryChange}
-            onQueryClear={() => { }}
-            onSort={setSortSelected}
-            primaryAction={primaryAction}
-            cancelAction={{
-              onAction: onHandleCancel,
-              disabled: false,
-              loading: false,
-            }}
-            tabs={tabs}
-            selected={selected}
-            onSelect={setSelected}
-            canCreateNewView
-            onCreateNewView={onCreateNewView}
-            filters={filters}
-            appliedFilters={appliedFilters}
-            onClearAll={handleFiltersClearAll}
-            mode={mode}
-            setMode={setMode}
-          />
-          <IndexTable
-            selectable
-            resourceName={resourceName}
-            itemCount={orders.length}
-            selectedItemsCount={allResourcesSelected ? 'All' : selectedResources.length}
-            onSelectionChange={handleSelectionChange}
-            condensed={showTable}
-            hasMoreItems
-            bulkActions={bulkActions}
-            promotedBulkActions={promotedBulkActions}
-            headings={[
-              { title: '' },
-              { title: 'Title' },
-              { title: 'Products' },
-              { title: 'Product conditions' },
-            ]}
-          >
-            {showTable ? ResponsiveRow : rowMarkup}
+        <Frame>
+          <Card padding={0}>
+            <IndexFilters
+              sortOptions={sortOptions}
+              sortSelected={sortSelected}
+              queryValue={queryValue}
+              queryPlaceholder="Searching in all"
+              onQueryChange={handleFiltersQueryChange}
+              onQueryClear={() => { }}
+              onSort={setSortSelected}
+              primaryAction={primaryAction}
+              cancelAction={{
+                onAction: onHandleCancel,
+                disabled: false,
+                loading: false,
+              }}
+              tabs={tabs}
+              selected={selected}
+              onSelect={setSelected}
+              canCreateNewView
+              onCreateNewView={onCreateNewView}
+              filters={filters}
+              appliedFilters={appliedFilters}
+              onClearAll={handleFiltersClearAll}
+              mode={mode}
+              setMode={setMode}
+            />
+            <IndexTable
+              selectable
+              resourceName={resourceName}
+              itemCount={orders.length}
+              selectedItemsCount={allResourcesSelected ? 'All' : selectedResources.length}
+              onSelectionChange={handleSelectionChange}
+              condensed={showTable}
+              hasMoreItems
+              bulkActions={bulkActions}
+              promotedBulkActions={promotedBulkActions}
+              headings={[
+                { title: '' },
+                { title: 'Title' },
+                { title: 'Products' },
+                { title: 'Product conditions' },
+              ]}
+            >
+              {showTable ? ResponsiveRow : rowMarkup}
 
-          </IndexTable>
-        </LegacyCard>
+            </IndexTable>
+          </Card>
+        </Frame>
       </AppProvider>
     </div>
   );

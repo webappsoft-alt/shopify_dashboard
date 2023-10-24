@@ -2,7 +2,7 @@
 import {
   TextField,
   IndexTable,
-  LegacyCard,
+  Card,
   IndexFilters,
   useSetIndexFiltersMode,
   useIndexResourceState,
@@ -13,6 +13,7 @@ import {
   AppProvider,
   BlockStack,
   InlineStack,
+  Frame,
 } from '@shopify/polaris';
 import en from "@shopify/polaris/locales/en.json";
 import { useRouter } from 'next/navigation';
@@ -267,7 +268,9 @@ const OrderDataTable = () => {
       onRemove: handleTaggedWithRemove,
     });
   }
-
+  const navigate = useCallback(() => {
+    router.push('/order/order-detail');
+  }, [router]);
   const orders = [
     {
       id: '1020',
@@ -339,7 +342,7 @@ const OrderDataTable = () => {
         key={items.id}
         selected={selectedResources.includes(items.id)}
         position={index}
-        onClick={() => router.push('/order/order-detail')}
+        onClick={navigate}
       >
         <IndexTable.Cell>
           <Text variant="bodyMd" fontWeight="bold" as="span">
@@ -366,7 +369,7 @@ const OrderDataTable = () => {
         selected={selectedResources.includes(items.id)}
         position={index}
       >
-        <div style={{ padding: '12px 16px', width: '100%' }}>
+        <div style={{ padding: '12px 16px', width: '100%' }} onClick={navigate}>
           <BlockStack gap="100">
             <Text as="span" variant="bodySm" tone="subdued">
               {items.order} • {items.date}
@@ -398,58 +401,60 @@ const OrderDataTable = () => {
   );
   return (
     <AppProvider i18n={en}>
-      <LegacyCard>
-        <IndexFilters
-          sortOptions={sortOptions}
-          sortSelected={sortSelected}
-          queryValue={queryValue}
-          queryPlaceholder="Searching in all"
-          onQueryChange={handleFiltersQueryChange}
-          onQueryClear={() => { }}
-          onSort={setSortSelected}
-          primaryAction={primaryAction}
-          cancelAction={{
-            onAction: onHandleCancel,
-            disabled: false,
-            loading: false,
-          }}
-          tabs={tabs}
-          selected={selected}
-          onSelect={setSelected}
-          canCreateNewView
-          onCreateNewView={onCreateNewView}
-          filters={filters}
-          appliedFilters={appliedFilters}
-          onClearAll={handleFiltersClearAll}
-          mode={mode}
-          setMode={setMode}
-          loading={false}
-        />
-        <IndexTable
-          resourceName={resourceName}
-          itemCount={orders.length}
-          selectedItemsCount={
-            allResourcesSelected ? 'All' : selectedResources.length
-          }
-          promotedBulkActions={promotedBulkActions}
-          bulkActions={bulkActions}
-          condensed={showTable}
-          onSelectionChange={handleSelectionChange}
-          headings={[
-            { title: 'Order' },
-            { title: 'Date' },
-            { title: 'Customer' },
-            { title: 'Channel' },
-            { title: 'Total' },
-            { title: 'Payment status' },
-            { title: 'Items' },
-            { title: 'Delivery status' },
-            { title: 'Delivery Method' },
-          ]}
-        >
-          {showTable ? ResponsiveRow : rowMarkup}
-        </IndexTable>
-      </LegacyCard>
+      <Frame  >
+        <Card padding={0}>
+          <IndexFilters
+            sortOptions={sortOptions}
+            sortSelected={sortSelected}
+            queryValue={queryValue}
+            queryPlaceholder="Searching in all"
+            onQueryChange={handleFiltersQueryChange}
+            onQueryClear={() => { }}
+            onSort={setSortSelected}
+            primaryAction={primaryAction}
+            cancelAction={{
+              onAction: onHandleCancel,
+              disabled: false,
+              loading: false,
+            }}
+            tabs={tabs}
+            selected={selected}
+            onSelect={setSelected}
+            canCreateNewView
+            onCreateNewView={onCreateNewView}
+            filters={filters}
+            appliedFilters={appliedFilters}
+            onClearAll={handleFiltersClearAll}
+            mode={mode}
+            setMode={setMode}
+            loading={false}
+          />
+          <IndexTable
+            resourceName={resourceName}
+            itemCount={orders.length}
+            selectedItemsCount={
+              allResourcesSelected ? 'All' : selectedResources.length
+            }
+            promotedBulkActions={promotedBulkActions}
+            bulkActions={bulkActions}
+            condensed={showTable}
+            onSelectionChange={handleSelectionChange}
+            headings={[
+              { title: 'Order' },
+              { title: 'Date' },
+              { title: 'Customer' },
+              { title: 'Channel' },
+              { title: 'Total' },
+              { title: 'Payment status' },
+              { title: 'Items' },
+              { title: 'Delivery status' },
+              { title: 'Delivery Method' },
+            ]}
+          >
+            {showTable ? ResponsiveRow : rowMarkup}
+          </IndexTable>
+        </Card>
+      </Frame>
     </AppProvider>
   );
 

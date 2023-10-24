@@ -10,9 +10,10 @@ import {
   RangeSlider,
   Badge,
   AppProvider,
-  LegacyCard,
+  Card,
   BlockStack,
   InlineStack,
+  Frame,
 } from '@shopify/polaris';
 import content from '@/components/assests/png/content.png'
 import en from "@shopify/polaris/locales/en.json";
@@ -322,9 +323,7 @@ const IndexTableWithViewsSearchFilterSorting = () => {
         <div style={{ padding: '12px 16px', width: '100%' }}>
           <BlockStack gap="100">
             <InlineStack align="space-between">
-              <Text as="span" variant="bodyMd" fontWeight="semibold">
-                {items.titleImage}
-              </Text>
+              <Image src={items.titleImage} alt='' className='w-8 object-contain' />
               <Text as="span" variant="bodyMd">
                 {items.product}
               </Text>
@@ -370,54 +369,56 @@ const IndexTableWithViewsSearchFilterSorting = () => {
   return (
     <div className=''>
       <AppProvider i18n={en} >
-        <LegacyCard   >
-          <IndexFilters
-            sortOptions={sortOptions}
-            sortSelected={sortSelected}
-            queryValue={queryValue}
-            queryPlaceholder="Searching in all"
-            onQueryChange={handleFiltersQueryChange}
-            onQueryClear={() => { }}
-            onSort={setSortSelected}
-            primaryAction={primaryAction}
-            cancelAction={{
-              onAction: onHandleCancel,
-              disabled: false,
-              loading: false,
-            }}
-            tabs={tabs}
-            selected={selected}
-            onSelect={setSelected}
-            canCreateNewView
-            onCreateNewView={onCreateNewView}
-            filters={filters}
-            appliedFilters={appliedFilters}
-            onClearAll={handleFiltersClearAll}
-            mode={mode}
-            setMode={setMode}
-          />
-          <IndexTable
-            selectable
-            resourceName={resourceName}
-            itemCount={orders.length}
-            selectedItemsCount={allResourcesSelected ? 'All' : selectedResources.length}
-            onSelectionChange={handleSelectionChange}
-            hasMoreItems
-            condensed={showTable}
-            promotedBulkActions={promotedBulkActions}
-            headings={[
-              { title: '' },
-              { title: 'Products' },
-              { title: 'SKU' },
-              { title: 'Unavailble' },
-              { title: 'Commited' },
-              { title: 'Available' },
-              { title: 'On hand' },
-            ]}
-          >
-            {showTable ? ResponsiveRow : rowMarkup}
-          </IndexTable>
-        </LegacyCard>
+        <Frame >
+          <Card padding={0}>
+            <IndexFilters
+              sortOptions={sortOptions}
+              sortSelected={sortSelected}
+              queryValue={queryValue}
+              queryPlaceholder="Searching in all"
+              onQueryChange={handleFiltersQueryChange}
+              onQueryClear={() => { }}
+              onSort={setSortSelected}
+              primaryAction={primaryAction}
+              cancelAction={{
+                onAction: onHandleCancel,
+                disabled: false,
+                loading: false,
+              }}
+              tabs={tabs}
+              selected={selected}
+              onSelect={setSelected}
+              canCreateNewView
+              onCreateNewView={onCreateNewView}
+              filters={filters}
+              appliedFilters={appliedFilters}
+              onClearAll={handleFiltersClearAll}
+              mode={mode}
+              setMode={setMode}
+            />
+            <IndexTable
+              selectable
+              resourceName={resourceName}
+              itemCount={orders.length}
+              selectedItemsCount={allResourcesSelected ? 'All' : selectedResources.length}
+              onSelectionChange={handleSelectionChange}
+              hasMoreItems
+              condensed={showTable}
+              promotedBulkActions={promotedBulkActions}
+              headings={[
+                { title: '' },
+                { title: 'Products' },
+                { title: 'SKU' },
+                { title: 'Unavailble' },
+                { title: 'Commited' },
+                { title: 'Available' },
+                { title: 'On hand' },
+              ]}
+            >
+              {showTable ? ResponsiveRow : rowMarkup}
+            </IndexTable>
+          </Card>
+        </Frame>
       </AppProvider>
     </div>
   );

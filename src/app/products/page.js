@@ -9,7 +9,7 @@ const Products = () => {
             <AppProvider i18n={en}>
                 <div className="2xl:container grid mx-auto">
                     <div className="container grid mx-auto ">
-                        <div className="mt-3 px-3">
+                        <div className="mt-3 px-2">
                             <h5 className="font-bold text-xl inter_bold">Products</h5>
                             <div className="bg-white mt-4 customer_height rounded-xl shadow1 p-4" >
                                 <div className="h-full w-full flex-col flex justify-center items-center">
@@ -17,7 +17,7 @@ const Products = () => {
 
                                     </div>
                                     <h6 className=" font-semibold mt-4 text-sm">First up: what are you selling?</h6>
-                                    <div className="w-2/4 f13 text-center px-4" style={{ color: "#787878" }} >
+                                    <div className="min-[700px]:w-2/4 f13 text-center px-4" style={{ color: "#787878" }} >
                                         Before you open your store, first you need some products.
                                     </div>
                                     <div className="flex gap-3 flex-wrap justify-center mt-3">
